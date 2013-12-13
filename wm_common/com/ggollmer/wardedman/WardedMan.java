@@ -1,7 +1,10 @@
 package com.ggollmer.wardedman;
 
+import net.minecraft.creativetab.CreativeTabs;
+
 import com.ggollmer.wardedman.core.handler.LocalizationHandler;
 import com.ggollmer.wardedman.core.helper.LogHelper;
+import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.PacketHandler;
 
@@ -38,11 +41,15 @@ import cpw.mods.fml.common.network.NetworkMod;
 		packetHandler = PacketHandler.class)
 public class WardedMan
 {
+	
+
 	@Instance(Reference.MOD_ID)
 	public static WardedMan instance;
 	
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static com.ggollmer.wardedman.core.proxy.CommonProxy proxy;
+	
+	public static final CreativeTabs tabsWardedMan = new CreativeTabWardedMan(CreativeTabs.getNextID(), Reference.MOD_ID);
 	
 	@EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)

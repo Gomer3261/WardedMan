@@ -1,7 +1,10 @@
 package com.ggollmer.wardedman;
 
+import java.io.File;
+
 import net.minecraft.creativetab.CreativeTabs;
 
+import com.ggollmer.wardedman.core.handler.ConfigurationHandler;
 import com.ggollmer.wardedman.core.handler.LocalizationHandler;
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
@@ -68,6 +71,8 @@ public class WardedMan
 		LogHelper.init();
 		
 		LocalizationHandler.loadLanguages();
+		
+		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
 		
 		WardedManItems.init();
 	}

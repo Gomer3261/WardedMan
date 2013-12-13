@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import com.ggollmer.wardedman.core.handler.LocalizationHandler;
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
+import com.ggollmer.wardedman.item.WardedManItems;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.PacketHandler;
 
@@ -67,6 +68,8 @@ public class WardedMan
 		LogHelper.init();
 		
 		LocalizationHandler.loadLanguages();
+		
+		WardedManItems.init();
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package com.ggollmer.wardedman.tattoo;
 
+import com.ggollmer.wardedman.lib.TattooConstants;
+
 import net.minecraftforge.common.MinecraftForge;
 
 public class TattooHandler
@@ -8,7 +10,7 @@ public class TattooHandler
 	
 	public static void init() {
 		
-		tattooDamageReduction = new TattooDamageReduction(0, null, null);
+		tattooDamageReduction = new TattooDamageReduction(TattooConstants.DAMAGE_REDUCTION_ID, TattooConstants.DAMAGE_REDUCTION_NAME);
 		
 		MinecraftForge.EVENT_BUS.register(tattooDamageReduction);
 	}

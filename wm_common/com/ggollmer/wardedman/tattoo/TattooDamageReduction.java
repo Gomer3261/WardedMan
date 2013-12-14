@@ -1,14 +1,13 @@
 package com.ggollmer.wardedman.tattoo;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class TattooDamageReduction extends Tattoo
 {
-	public TattooDamageReduction(int id, String name, ResourceLocation texture) {
-		super(id, name, texture);
+	public TattooDamageReduction(int id, String name) {
+		super(id, name);
 	}
 
 	@Override

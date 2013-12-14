@@ -17,10 +17,16 @@ import net.minecraft.world.World;
 
 public class GuiTattooNeedle extends GuiScreen
 {
-	protected static final ResourceLocation needleGuiLocation = new ResourceLocation(Reference.MOD_ID, "textures/gui/tattooNeedleGui.png");
+	protected static final ResourceLocation NEEDLE_GUI_LOCATION = new ResourceLocation(Reference.MOD_ID, "textures/gui/tattooNeedleGui.png");
 	
-	protected static final int[] xTattooCoordinates = new int[]{25, 19, 31, 25, 7, 19, 32, 44, 19, 32, 75, 67, 83, 75, 69, 81, 56, 93, 68, 82, 69, 82};
-	protected static final int[] yTattooCoordinates = new int[]{10, 29, 29, 43, 63, 69, 69, 63, 109, 109, 9, 27, 27, 42, 57, 57, 63, 62, 74, 74, 94, 94};
+	protected static final int[] X_TATTOO_COORDIANTES = new int[]{25, 19, 31, 25, 7, 19, 32, 44, 19, 32, 75, 67, 83, 75, 69, 81, 56, 93, 68, 82, 69, 82};
+	protected static final int[] Y_TATTOO_COORDINATES = new int[]{10, 29, 29, 43, 63, 69, 69, 63, 109, 109, 9, 27, 27, 42, 57, 57, 63, 62, 74, 74, 94, 94};
+	
+	protected static final int TATTOO_IMAGE_COLS = 3;
+	protected static final int TATTOO_IMAGE_ROWS = 6;
+	
+	protected static final int TATTOO_COLOUR_COLS = 8;
+	protected static final int TATTOO_COLOUR_ROWS = 2;
 	
 	/** The X size of the inventory window in pixels. */
     public int xSize = 176;
@@ -54,15 +60,24 @@ public class GuiTattooNeedle extends GuiScreen
         int yOffset = (this.height - this.ySize) / 2;
         
         tattooLocationButtons = new ArrayList<GuiButton>(TattooConstants.TATTOO_LOCATION_COUNT);
-        for(int i=0; i<TattooConstants.TATTOO_ID_COUNT; i++) {
-        	tattooLocationButtons.add(i, new GuiButton(2+i, xOffset + xTattooCoordinates[i], yOffset + yTattooCoordinates[i], ))
+        for(int i=0; i<TattooConstants.TATTOO_LOCATION_COUNT; i++) {
+        	tattooLocationButtons.add(i, new GuiButtonInLineSelection(2+i, xOffset + X_TATTOO_COORDIANTES[i], yOffset + Y_TATTOO_COORDINATES[i], 176, 84, 176, 108, 176, 96, 12, 12, NEEDLE_GUI_LOCATION, null));
+        	buttonList.add(tattooLocationButtons.get(i));
+        }
+        
+        tattooColourButtons = new ArrayList<GuiButton>(TattooConstants.TATTOO_COLOUR_COUNT);
+        for(int i=0; i<TATTOO_COLOUR_ROWS; i++) {
+        	for(int j=0; j<TATTOO_COLOUR_COLS; j++) {
+        		tattooLocationButtons.add(i, new GuiButtonInLineSelection(2+i, xOffset + X_TATTOO_COORDIANTES[i], yOffset + Y_TATTOO_COORDINATES[i], 176, 84, 176, 108, 176, 96, 12, 12, NEEDLE_GUI_LOCATION, null));
+        		buttonList.add(tattooLocationButtons.get(i));
+        	}
         }
         
         tattooColourButtons = new ArrayList<GuiButton>(16);
         tattooImageButtons = new ArrayList<GuiButton>(TattooConstants.TATTOO_ID_COUNT);
         
-        buttonList.add(submitButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), needleGuiLocation));
-        buttonList.add(cancelButton = new GuiButtonInLine(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), needleGuiLocation));
+        buttonList.add(submitButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), NEEDLE_GUI_LOCATION));
+        buttonList.add(cancelButton = new GuiButtonInLine(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), NEEDLE_GUI_LOCATION));
         
         submitButton.enabled = false;
 	}
@@ -73,7 +88,7 @@ public class GuiTattooNeedle extends GuiScreen
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.drawDefaultBackground();
 		
-        this.mc.getTextureManager().bindTexture(needleGuiLocation);
+        this.mc.getTextureManager().bindTexture(NEEDLE_GUI_LOCATION);
         int xOffset = (this.width - this.xSize) / 2;
         int yOffset = (this.height - this.ySize) / 2;
         
@@ -87,6 +102,13 @@ public class GuiTattooNeedle extends GuiScreen
 		if(button == cancelButton) {
 			this.mc.displayGuiScreen((GuiScreen)null);
 	        this.mc.setIngameFocus();
+		}
+		for(GuiButton locationButton : tattooLocationButtons) {
+			if(locationButton == button) {
+				if(activeLocationButton != null) ((GuiButtonInLineSelection)activeLocationButton).setSelected(false);
+				activeLocationButton = locationButton;
+				((GuiButtonInLineSelection)activeLocationButton).setSelected(true);
+			}
 		}
 	}
 	

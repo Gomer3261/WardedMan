@@ -11,7 +11,7 @@ import cpw.mods.fml.common.IPlayerTracker;
 
 public class TattooTracker implements IPlayerTracker
 {
-	public ConcurrentHashMap<String, PlayerTattooStats> tattooStatsMap = new ConcurrentHashMap<String, PlayerTattooStats>();
+	public ConcurrentHashMap<String, TattooStats> tattooStatsMap = new ConcurrentHashMap<String, TattooStats>();
 
 	@Override
 	public void onPlayerLogin(EntityPlayer player)
@@ -21,7 +21,7 @@ public class TattooTracker implements IPlayerTracker
         {
             playerTags.setCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME, new NBTTagCompound());
         }
-		PlayerTattooStats stats = new PlayerTattooStats();
+		TattooStats stats = new TattooStats();
         stats.player = new WeakReference<EntityPlayer>(player);
         stats.loadFromNBT(player);
         
@@ -43,11 +43,11 @@ public class TattooTracker implements IPlayerTracker
 	@Override
 	public void onPlayerRespawn(EntityPlayer player)
 	{
-		PlayerTattooStats stats = getPlayerTattooStats(player.username);
+		TattooStats stats = getPlayerTattooStats(player.username);
         stats.player = new WeakReference<EntityPlayer>(player);
 	}
 	
-	public PlayerTattooStats getPlayerTattooStats(String username) {
+	public TattooStats getPlayerTattooStats(String username) {
 		if(tattooStatsMap.containsKey(username)) {
 			return tattooStatsMap.get(username);
 		}
@@ -69,7 +69,7 @@ public class TattooTracker implements IPlayerTracker
 	{
 		if (player != null)
         {
-			PlayerTattooStats stats = tattooStatsMap.get(player.username);
+			TattooStats stats = tattooStatsMap.get(player.username);
 			if(stats != null) {
 				stats.saveToNBT(player);
 				if(clean) tattooStatsMap.remove(player.username);

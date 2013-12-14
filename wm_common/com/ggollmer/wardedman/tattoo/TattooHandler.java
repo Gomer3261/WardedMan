@@ -8,7 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class TattooHandler
 {
-	public static Tattoo[] tattoos = new Tattoo[TattooConstants.TATTOO_ID_COUNT];
+	public static Tattoo[] tattoos = new Tattoo[TattooConstants.ID_COUNT];
 	
 	public static Tattoo tattooDamageReduction;
 	

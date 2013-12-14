@@ -9,19 +9,19 @@ import com.ggollmer.wardedman.tattoo.TattooHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class PlayerTattooStats
+public class TattooStats
 {
 	public WeakReference<EntityPlayer> player;
 	
 	public int[] tattooValues;
 	public int[] tattooCounts;
 	
-	public PlayerTattooStats() {
-		tattooValues = new int[TattooConstants.TATTOO_LOCATION_COUNT];
-		for(int i=0; i<TattooConstants.TATTOO_LOCATION_COUNT; i++) {
+	public TattooStats() {
+		tattooValues = new int[TattooConstants.LOCATION_COUNT];
+		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
 			tattooValues[i] = -1;
 		}
-		tattooCounts = new int[TattooConstants.TATTOO_ID_COUNT];
+		tattooCounts = new int[TattooConstants.ID_COUNT];
 	}
 	
 	public boolean applyTattoo(int tattooLocation, int tattooId) {

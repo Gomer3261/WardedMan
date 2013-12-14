@@ -68,13 +68,18 @@ public class GuiTattooNeedle extends GuiScreen
         tattooColourButtons = new ArrayList<GuiButton>(TattooConstants.TATTOO_COLOUR_COUNT);
         for(int i=0; i<TATTOO_COLOUR_ROWS; i++) {
         	for(int j=0; j<TATTOO_COLOUR_COLS; j++) {
-        		tattooLocationButtons.add(i, new GuiButtonInLineSelection(2+i, xOffset + X_TATTOO_COORDIANTES[i], yOffset + Y_TATTOO_COORDINATES[i], 176, 84, 176, 108, 176, 96, 12, 12, NEEDLE_GUI_LOCATION, null));
-        		buttonList.add(tattooLocationButtons.get(i));
+        		tattooColourButtons.add(j + i*TATTOO_COLOUR_COLS, new GuiButtonInLineSelection(2+TattooConstants.TATTOO_LOCATION_COUNT+j+i*TATTOO_COLOUR_COLS, xOffset + 8 + j*15, yOffset + 129 + i*15, 190, 36, 204, 36, 176, 36, 14, 14, NEEDLE_GUI_LOCATION, null));
+        		buttonList.add(tattooColourButtons.get(j + i*TATTOO_COLOUR_COLS));
         	}
         }
         
-        tattooColourButtons = new ArrayList<GuiButton>(16);
         tattooImageButtons = new ArrayList<GuiButton>(TattooConstants.TATTOO_ID_COUNT);
+        for(int i=0; i<TATTOO_IMAGE_ROWS; i++) {
+        	for(int j=0; j<TATTOO_IMAGE_COLS; j++) {
+        		tattooImageButtons.add(j + i*TATTOO_IMAGE_COLS, new GuiButtonInLineSelection(2+TattooConstants.TATTOO_LOCATION_COUNT+TattooConstants.TATTOO_ID_COUNT+j+i*TATTOO_IMAGE_COLS, xOffset + 112 + j*19, yOffset + 8 + i*19, 176, 0, 194, 0, 176, 18, 18, 18, NEEDLE_GUI_LOCATION, null));
+        		buttonList.add(tattooImageButtons.get(j + i*TATTOO_IMAGE_COLS));
+        	}
+        }
         
         buttonList.add(submitButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), NEEDLE_GUI_LOCATION));
         buttonList.add(cancelButton = new GuiButtonInLine(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), NEEDLE_GUI_LOCATION));
@@ -99,7 +104,7 @@ public class GuiTattooNeedle extends GuiScreen
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		if(button == cancelButton) {
+		if(button == cancelButton || button == submitButton) {
 			this.mc.displayGuiScreen((GuiScreen)null);
 	        this.mc.setIngameFocus();
 		}
@@ -108,7 +113,33 @@ public class GuiTattooNeedle extends GuiScreen
 				if(activeLocationButton != null) ((GuiButtonInLineSelection)activeLocationButton).setSelected(false);
 				activeLocationButton = locationButton;
 				((GuiButtonInLineSelection)activeLocationButton).setSelected(true);
+				checkValidOperation();
 			}
+		}
+		for(GuiButton colourButton : tattooColourButtons) {
+			if(colourButton == button) {
+				if(activeColourButton != null) ((GuiButtonInLineSelection)activeColourButton).setSelected(false);
+				activeColourButton = colourButton;
+				((GuiButtonInLineSelection)activeColourButton).setSelected(true);
+				checkValidOperation();
+			}
+		}
+		for(GuiButton imageButton : tattooImageButtons) {
+			if(imageButton == button) {
+				if(activeImageButton != null) ((GuiButtonInLineSelection)activeImageButton).setSelected(false);
+				activeImageButton = imageButton;
+				((GuiButtonInLineSelection)activeImageButton).setSelected(true);
+				checkValidOperation();
+			}
+		}
+	}
+	
+	private void checkValidOperation() {
+		if(activeLocationButton != null && activeColourButton != null && activeImageButton != null) {
+			submitButton.enabled = true;
+		}
+		else {
+			submitButton.enabled = false;
 		}
 	}
 	

@@ -36,6 +36,8 @@ public class GuiButtonInLine extends GuiButton
             FontRenderer fontrenderer = par1Minecraft.fontRenderer;
             par1Minecraft.getTextureManager().bindTexture(buttonTexture);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             this.field_82253_i = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
             int hoverState = this.getHoverState(this.field_82253_i);
             

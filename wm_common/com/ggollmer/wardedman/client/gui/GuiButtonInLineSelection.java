@@ -29,6 +29,8 @@ public class GuiButtonInLineSelection extends GuiButtonInLine
 		if(selected) {
 			par1Minecraft.getTextureManager().bindTexture(buttonTexture);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             this.drawTexturedModalRect(this.xPosition, this.yPosition, this.xSelectedPosition, this.ySelectedPosition, this.width, this.height);
 		} else {
 			super.drawButton(par1Minecraft, par2, par3);

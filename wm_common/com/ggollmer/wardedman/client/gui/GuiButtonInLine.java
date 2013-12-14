@@ -9,17 +9,22 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonInLine extends GuiButton
 {
-	private ResourceLocation buttonTexture;
+	protected ResourceLocation buttonTexture;
 	
 	public int xHoverPosition;
 	public int yHoverPosition;
 	
-	public GuiButtonInLine(int id, int x, int y, int hx, int hy, int width, int height,
+	public int xDisabledPosition;
+	public int yDisabledPosition;
+	
+	public GuiButtonInLine(int id, int x, int y, int hx, int hy, int dx, int dy, int width, int height,
 			String name, ResourceLocation texture)
 	{
 		super(id, x, y, width, height, name);
 		xHoverPosition = hx;
 		yHoverPosition = hy;
+		xDisabledPosition = dx;
+		yDisabledPosition = dy;
 		buttonTexture = texture;
 	}
 	
@@ -36,6 +41,8 @@ public class GuiButtonInLine extends GuiButton
             
             switch(hoverState) {
             	case 0:
+            		this.drawTexturedModalRect(this.xPosition, this.yPosition, this.xDisabledPosition, this.yDisabledPosition, this.width, this.height);
+            		break;
             	case 1:
             		break;
             	case 2:

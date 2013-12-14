@@ -4,7 +4,7 @@ public class TattooConstants
 {
 	/* damageReductionTattoo */
 	
-	public static final int MAX_TATTOO_ID = 16;
+	public static final int TATTOO_ID_COUNT = 18;
 	public static final int TATTOO_LOCATION_COUNT = 22;
 	
 	public static final int NO_TATOO_ID = -1;

@@ -21,7 +21,7 @@ public class PlayerTattooStats
 		for(int i=0; i<TattooConstants.TATTOO_LOCATION_COUNT; i++) {
 			tattooValues[i] = -1;
 		}
-		tattooCounts = new int[TattooConstants.MAX_TATTOO_ID];
+		tattooCounts = new int[TattooConstants.TATTOO_ID_COUNT];
 	}
 	
 	public boolean applyTattoo(int tattooLocation, int tattooId) {

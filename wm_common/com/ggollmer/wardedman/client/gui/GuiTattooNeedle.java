@@ -37,8 +37,8 @@ public class GuiTattooNeedle extends GuiScreen
 		int xOffset = (this.width - this.xSize) / 2;
         int yOffset = (this.height - this.ySize) / 2;
         
-        this.buttonList.add(submitButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 126, 176, 50, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), needleGuiLocation));
-        this.buttonList.add(cancelButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 144, 176, 50, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), needleGuiLocation));
+        buttonList.add(submitButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 126, 176, 50, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), needleGuiLocation));
+        buttonList.add(cancelButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 144, 176, 50, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), needleGuiLocation));
 	}
 	
 	@Override

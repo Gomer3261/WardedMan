@@ -7,7 +7,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiButtonInLine extends GuiButton
+public class GuiButtonModal extends GuiButton
 {
 	protected ResourceLocation buttonTexture;
 	
@@ -17,7 +17,7 @@ public class GuiButtonInLine extends GuiButton
 	public int xDisabledPosition;
 	public int yDisabledPosition;
 	
-	public GuiButtonInLine(int id, int x, int y, int hx, int hy, int dx, int dy, int width, int height,
+	public GuiButtonModal(int id, int x, int y, int hx, int hy, int dx, int dy, int width, int height,
 			String name, ResourceLocation texture)
 	{
 		super(id, x, y, width, height, name);

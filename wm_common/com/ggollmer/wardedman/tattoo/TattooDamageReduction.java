@@ -8,6 +8,8 @@ public class TattooDamageReduction extends Tattoo
 {
 	public TattooDamageReduction(int id, String name) {
 		super(id, name);
+		
+		TattooHandler.
 	}
 
 	@Override

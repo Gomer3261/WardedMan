@@ -42,13 +42,13 @@ public class GuiTattooNeedle extends GuiScreen
     GuiButton cancelButton;
     GuiButton submitButton;
     
-    List<GuiButtonInLineSelectable> locationButtons;
+    List<GuiButtonSelectableDisplay> locationButtons;
     int activeLocation = -1;
     
-    List<GuiButtonInLineSelectable> colourButtons;
+    List<GuiButtonSelectableDisplay> colourButtons;
     int activeColour = -1;
     
-    List<GuiButtonInLineSelectable> imageButtons;
+    List<GuiButtonSelectableDisplay> imageButtons;
     int activeImage = -1;
 	
 	public GuiTattooNeedle(EntityPlayer thePlayer, World world, int x, int y, int z)
@@ -62,47 +62,49 @@ public class GuiTattooNeedle extends GuiScreen
 		int xOffset = (this.width - this.xSize) / 2;
         int yOffset = (this.height - this.ySize) / 2;
         
-        locationButtons = new ArrayList<GuiButtonInLineSelectable>(TattooConstants.LOCATION_COUNT);
+        locationButtons = new ArrayList<GuiButtonSelectableDisplay>(TattooConstants.LOCATION_COUNT);
         for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
-        	locationButtons.add(i, new GuiButtonInLineSelectable(
-        						2+i,
+        	locationButtons.add(i, new GuiButtonSelectableDisplay(
+        						2+i, i,
         						xOffset + X_TATTOO_COORDS[i], yOffset + Y_TATTOO_COORDS[i],
         						176, 84, 176, 108, 176, 96, 12, 12,
         						NEEDLE_GUI_LOCATION));
         	buttonList.add(locationButtons.get(i));
         }
         
-        colourButtons = new ArrayList<GuiButtonInLineSelectable>(TattooConstants.COLOUR_COUNT);
+        colourButtons = new ArrayList<GuiButtonSelectableDisplay>(TattooConstants.COLOUR_COUNT);
         for(int i=0; i<COLOUR_ROWS; i++) {
         	for(int j=0; j<COLOUR_COLS; j++) {
-        		colourButtons.add(j + i*COLOUR_COLS, new GuiButtonInLineSelectable(
-        						2+TattooConstants.LOCATION_COUNT+j+i*COLOUR_COLS, 
+        		colourButtons.add(j + i*COLOUR_COLS, new GuiButtonSelectableDisplay(
+        						2+TattooConstants.LOCATION_COUNT+j+i*COLOUR_COLS, j+i*COLOUR_COLS,
         						xOffset + 8 + j*15, yOffset + 129 + i*15, 
         						190, 36, 204, 36, 176, 36, 14, 14, 
-        						NEEDLE_GUI_LOCATION, new ResourceLocation("textures/items/dye_powder" + "_" + ItemDye.dyeItemNames[j + i*COLOUR_COLS] + ".png")));
+        						NEEDLE_GUI_LOCATION)
+        						.setInternalTexture(new ResourceLocation("textures/items/dye_powder" + "_" + ItemDye.dyeItemNames[j + i*COLOUR_COLS] + ".png")));
         		buttonList.add(colourButtons.get(j + i*COLOUR_COLS));
         	}
         }
         
-        imageButtons = new ArrayList<GuiButtonInLineSelectable>(TattooConstants.ID_COUNT);
+        imageButtons = new ArrayList<GuiButtonSelectableDisplay>(TattooConstants.ID_COUNT);
         for(int i=0; i<IMAGE_ROWS; i++) {
         	for(int j=0; j<IMAGE_COLS; j++) {
         		ResourceLocation temp = null;
         		if(TattooHandler.tattoos[j + i*IMAGE_COLS] != null) {
         			temp = TattooHandler.tattoos[j + i*IMAGE_COLS].tattooImage;
         		}
-        		imageButtons.add(j + i*IMAGE_COLS, new GuiButtonInLineSelectable(
-        						2+TattooConstants.LOCATION_COUNT+TattooConstants.ID_COUNT+j+i*IMAGE_COLS, 
+        		imageButtons.add(j + i*IMAGE_COLS, new GuiButtonSelectableDisplay(
+        						2+TattooConstants.LOCATION_COUNT+TattooConstants.ID_COUNT+j+i*IMAGE_COLS, j+i*IMAGE_COLS,
         						xOffset + 112 + j*19, yOffset + 8 + i*19,
         						176, 0, 194, 0, 176, 18, 18, 18,
-        						NEEDLE_GUI_LOCATION, temp));
+        						NEEDLE_GUI_LOCATION)
+        						.setInternalRect(temp, ItemDye.dyeColors[4]));
         		buttonList.add(imageButtons.get(j + i*IMAGE_COLS));
         		if(temp == null) imageButtons.get(j + i*IMAGE_COLS).enabled = false;
         	}
         }
         
-        buttonList.add(submitButton = new GuiButtonInLine(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), NEEDLE_GUI_LOCATION));
-        buttonList.add(cancelButton = new GuiButtonInLine(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), NEEDLE_GUI_LOCATION));
+        buttonList.add(submitButton = new GuiButtonModal(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), NEEDLE_GUI_LOCATION));
+        buttonList.add(cancelButton = new GuiButtonModal(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), NEEDLE_GUI_LOCATION));
         
         submitButton.enabled = false;
 	}

@@ -15,6 +15,7 @@ public class TattooStats
 	
 	public int[] tattooValues;
 	public int[] tattooCounts;
+	public int[] tattooColours;
 	
 	public TattooStats() {
 		tattooValues = new int[TattooConstants.LOCATION_COUNT];
@@ -22,14 +23,16 @@ public class TattooStats
 			tattooValues[i] = -1;
 		}
 		tattooCounts = new int[TattooConstants.ID_COUNT];
+		tattooColours = new int[TattooConstants.LOCATION_COUNT];
 	}
 	
-	public boolean applyTattoo(int tattooLocation, int tattooId) {
+	public boolean applyTattoo(int tattooLocation, int tattooId, int tattooColour) {
 		if(tattooValues[tattooLocation] != -1) return false;
 		if(TattooHandler.tattoos[tattooId] == null) return false;
 		
 		tattooCounts[tattooId] ++;
 		tattooValues[tattooLocation] = tattooId;
+		tattooColours[tattooLocation] = tattooColour;
 		
 		if(TattooHandler.tattoos[tattooId].tattooCanBeActivated()) TattooHandler.tattoos[tattooId].onTattooActivation(player.get(), tattooCounts[tattooId]);
 		
@@ -40,8 +43,12 @@ public class TattooStats
 		return tattooCounts[id];
 	}
 	
-	public int getTattooAt(int tattooLocation) {
+	public int getTattooId(int tattooLocation) {
 		return tattooValues[tattooLocation];
+	}
+	
+	public int getTattooColour(int tattooLocation) {
+		return tattooColours[tattooLocation];
 	}
 	
 	public void saveToNBT(EntityPlayer ePlayer) {
@@ -54,6 +61,7 @@ public class TattooStats
 		NBTTagCompound wmTags = playerTags.getCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME);
 		wmTags.setIntArray(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME, tattooValues);
 		wmTags.setIntArray(PlayerNBTNames.TATTOO_AMOUNT_LIST_NAME, tattooCounts);
+		wmTags.setIntArray(PlayerNBTNames.TATTOO_COLOUR_LIST_NAME, tattooColours);
 	}
 	
 	public void loadFromNBT(EntityPlayer ePlayer) {
@@ -66,5 +74,6 @@ public class TattooStats
 		NBTTagCompound wmTags = playerTags.getCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME);
 		tattooValues = wmTags.getIntArray(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME);
 		tattooCounts = wmTags.getIntArray(PlayerNBTNames.TATTOO_AMOUNT_LIST_NAME);
+		tattooColours = wmTags.getIntArray(PlayerNBTNames.TATTOO_COLOUR_LIST_NAME);
 	}
 }

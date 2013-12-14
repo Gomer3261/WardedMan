@@ -23,6 +23,7 @@ public class TattooTracker implements IPlayerTracker
         }
 		PlayerTattooStats stats = new PlayerTattooStats();
         stats.player = new WeakReference<EntityPlayer>(player);
+        stats.loadFromNBT(player);
         
         tattooStatsMap.put(player.username, stats);
 	}

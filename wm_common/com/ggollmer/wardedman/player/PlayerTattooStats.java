@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
+import com.ggollmer.wardedman.tattoo.TattooHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,9 +26,13 @@ public class PlayerTattooStats
 	
 	public boolean applyTattoo(int tattooLocation, int tattooId) {
 		if(tattooValues[tattooLocation] != -1) return false;
+		if(TattooHandler.tattoos[tattooId] == null) return false;
 		
 		tattooCounts[tattooId] ++;
 		tattooValues[tattooLocation] = tattooId;
+		
+		if(TattooHandler.tattoos[tattooId].tattooCanBeActivated()) TattooHandler.tattoos[tattooId].onTattooActivation(player.get(), tattooCounts[tattooId]);
+		
 		return true;
 	}
 	

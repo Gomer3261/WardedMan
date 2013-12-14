@@ -31,6 +31,10 @@ public abstract class Tattoo
 		return LocalizationHelper.getLocalizedString(unlocalizedName + ".desc");
 	}
 	
+	public ResourceLocation getTattooImage() {
+		return tattooImage;
+	}
+	
 	public abstract void onTattooActivation(EntityPlayer player, int tattooCount);
 	
 	public boolean tattooCanBeActivated() {

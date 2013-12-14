@@ -23,5 +23,4 @@ public class TattooHandler
 	{
 		return WardedMan.tattooTracker.getPlayerTattooStats(player.username).getTattooAmount(id);
 	}
-
 }

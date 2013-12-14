@@ -5,4 +5,6 @@
 	<entry key="item.tattooNeedle.name">Tattoo Needle</entry>
 	<entry key="tile.changeme.name">Text</entry>
 	<entry key="itemGroup.wardedman">WardedMan</entry>
+	<entry key="gui.tattooNeedle.submit">Tattoo</entry>
+	<entry key="gui.tattooNeedle.cancel">Cancel</entry>
 </properties>

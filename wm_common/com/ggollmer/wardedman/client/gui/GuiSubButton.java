@@ -42,24 +42,37 @@ public class GuiSubButton
 		this.ya = ya;
 	}
 	
-	public void handleMouseEvent(int x, int y, int button) {
+	public boolean handleMouseEvent(int mx, int my, int button, int xOffset, int yOffset) {
+		
+		if(mx >= x && mx <= x + width &&
+				my >= y && my <= y + height) {
+			this.state = State.HOVER;
+			if(button != -1) {
+				this.state = State.DOWN;
+			}
+			else if(button == -1) {
+				this.state = State.HOVER;
+				return false;
+			}
+		}
+		else {
+			this.state = State.UP;
+		}
+		return false;
+	}
+	
+	public void drawButton(int xOffset, int yOffset) {
 		switch(this.state) {
 			case UP:
-				// CHECK IF WE ARE HOVERING OR CLICKED
 				break;
 			case HOVER:
-				// CHECK IF WE ARE CLICKED OR NOT HOVERING
+				screen.drawTexturedModalRect(xOffset + this.x, yOffset + this.y, this.xh, this.yh, this.width, this.height);
 				break;
 			case DOWN:
-				// CHECK IF WE ARE HOVERING AND NOT CLICKED
-				// CHECK IF WE ARE CLICKED AND NOT HOVERING
+				screen.drawTexturedModalRect(xOffset + this.x, yOffset + this.y, this.xa, this.ya, this.width, this.height);
 				break;
 			default:
 				break;
 		}
-	}
-	
-	public void drawButton() {
-		
 	}
 }

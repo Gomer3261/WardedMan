@@ -13,6 +13,7 @@ import com.ggollmer.wardedman.item.WardedManItems;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.PacketHandler;
 import com.ggollmer.wardedman.player.TattooTracker;
+import com.ggollmer.wardedman.tattoo.TattooHandler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -86,6 +87,8 @@ public class WardedMan
 		
 		tattooTracker = new TattooTracker();
         GameRegistry.registerPlayerTracker(tattooTracker);
+        
+        TattooHandler.init();
 	}
 	
 	/**

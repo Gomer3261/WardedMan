@@ -1,11 +1,15 @@
 package com.ggollmer.wardedman.tattoo;
 
+import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.lib.TattooConstants;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 
 public class TattooHandler
 {
+	public static Tattoo[] tattoos = new Tattoo[TattooConstants.MAX_TATTOO_ID+1];
+	
 	public static Tattoo tattooDamageReduction;
 	
 	public static void init() {
@@ -15,9 +19,9 @@ public class TattooHandler
 		MinecraftForge.EVENT_BUS.register(tattooDamageReduction);
 	}
 	
-	public static int getPlayerTattooAmount(int id)
+	public static int getPlayerTattooAmount(EntityPlayer player, int id)
 	{
-		return 0;
+		return WardedMan.tattooTracker.getPlayerTattooStats(player.username).getTattooAmount(id);
 	}
 
 }

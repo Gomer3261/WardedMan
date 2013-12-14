@@ -16,6 +16,7 @@ public abstract class Tattoo
 		this.id = id;
 		tattooImage = new ResourceLocation(Reference.MOD_ID, "textures/tattoo/" + name + ".png");
 		setUnlocalizedName(name);
+		TattooHandler.tattoos[id] = this;
 	}
 	
 	public void setUnlocalizedName(String name) {

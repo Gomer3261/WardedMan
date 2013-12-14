@@ -12,6 +12,7 @@ import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
 import com.ggollmer.wardedman.item.WardedManItems;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.PacketHandler;
+import com.ggollmer.wardedman.player.TattooTracker;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * IneveraCraft
@@ -57,6 +59,8 @@ public class WardedMan
 	
 	public static final CreativeTabs tabsWardedMan = new CreativeTabWardedMan(CreativeTabs.getNextID(), Reference.MOD_ID);
 	
+	public static TattooTracker tattooTracker;
+	
 	@EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
 	{
@@ -79,6 +83,9 @@ public class WardedMan
 		WardedManItems.init();
 		
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		
+		tattooTracker = new TattooTracker();
+        GameRegistry.registerPlayerTracker(tattooTracker);
 	}
 	
 	/**

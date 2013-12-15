@@ -13,9 +13,14 @@ import com.ggollmer.wardedman.tattoo.TattooHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class GuiTattooNeedle extends GuiScreen
 {
@@ -29,6 +34,8 @@ public class GuiTattooNeedle extends GuiScreen
 	
 	protected static final int COLOUR_COLS = 8;
 	protected static final int COLOUR_ROWS = 2;
+	
+	protected EntityPlayer player;
 	
 	/** The X size of the inventory window in pixels. */
     public int xSize = 176;
@@ -54,6 +61,8 @@ public class GuiTattooNeedle extends GuiScreen
 	public GuiTattooNeedle(EntityPlayer thePlayer, World world, int x, int y, int z)
     {
         super();
+        this.player = thePlayer;
+        MinecraftForge.EVENT_BUS.register(this);
     }
 	
 	@SuppressWarnings("unchecked")
@@ -84,29 +93,31 @@ public class GuiTattooNeedle extends GuiScreen
         		buttonList.add(colourButtons.get(j + i*COLOUR_COLS));
         	}
         }
+        updateColourButtons();
         
         imageButtons = new ArrayList<GuiButtonSelectableDisplay>(TattooConstants.ID_COUNT);
         for(int i=0; i<IMAGE_ROWS; i++) {
         	for(int j=0; j<IMAGE_COLS; j++) {
-        		ResourceLocation temp = null;
-        		if(TattooHandler.tattoos[j + i*IMAGE_COLS] != null) {
-        			temp = TattooHandler.tattoos[j + i*IMAGE_COLS].tattooImage;
-        		}
         		imageButtons.add(j + i*IMAGE_COLS, new GuiButtonSelectableDisplay(
         						2+TattooConstants.LOCATION_COUNT+TattooConstants.ID_COUNT+j+i*IMAGE_COLS, j+i*IMAGE_COLS,
         						xOffset + 112 + j*19, yOffset + 8 + i*19,
         						176, 0, 194, 0, 176, 18, 18, 18,
-        						NEEDLE_GUI_LOCATION)
-        						.setInternalRect(temp, ItemDye.dyeColors[4]));
+        						NEEDLE_GUI_LOCATION));
         		buttonList.add(imageButtons.get(j + i*IMAGE_COLS));
-        		if(temp == null) imageButtons.get(j + i*IMAGE_COLS).enabled = false;
+        		imageButtons.get(j + i*IMAGE_COLS).enabled = false;
         	}
         }
         
         buttonList.add(submitButton = new GuiButtonModal(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), NEEDLE_GUI_LOCATION));
         buttonList.add(cancelButton = new GuiButtonModal(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), NEEDLE_GUI_LOCATION));
         
-        submitButton.enabled = false;
+        if(activeLocation >= 0) {
+        	locationButtons.get(activeLocation).setSelected(true);
+        	updateImageButtons(locationButtons.get(activeLocation).getSelectionId());
+        }
+        if(activeColour >= 0) colourButtons.get(activeColour).setSelected(true);
+        if(activeImage >= 0) imageButtons.get(activeImage).setSelected(true);
+        checkValidOperation();
 	}
 	
 	@Override
@@ -133,12 +144,14 @@ public class GuiTattooNeedle extends GuiScreen
 			submitTattooRequest(activeLocation, activeImage, activeColour);
 		}
 		
-		
 		for(int i=0; i < TattooConstants.LOCATION_COUNT; i++) {
 			if(locationButtons.get(i) == button) {
 				if(activeLocation >= 0) locationButtons.get(activeLocation).setSelected(false);
+				if(activeImage >= 0) imageButtons.get(activeImage).setSelected(false);
 				activeLocation = i;
+				activeImage = -1;
 				locationButtons.get(activeLocation).setSelected(true);
+				updateImageButtons(locationButtons.get(activeLocation).getSelectionId());
 				checkValidOperation();
 			}
 		}
@@ -147,6 +160,7 @@ public class GuiTattooNeedle extends GuiScreen
 				if(activeColour >= 0) colourButtons.get(activeColour).setSelected(false);
 				activeColour = i;
 				colourButtons.get(activeColour).setSelected(true);
+				if(activeLocation >= 0) updateImageButtons(locationButtons.get(activeLocation).getSelectionId());
 				checkValidOperation();
 			}
 		}
@@ -160,6 +174,26 @@ public class GuiTattooNeedle extends GuiScreen
 		}
 	}
 	
+	public boolean doesGuiPauseGame()
+    {
+        return false;
+    }
+	
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		MinecraftForge.EVENT_BUS.unregister(this);
+	}
+	
+	@ForgeSubscribe
+	public void onItemPickup(EntityItemPickupEvent event) {
+		if(event.item.getEntityItem().getItem() == Item.dyePowder) {
+			if(event.item.getEntityItem().getItemDamage() < 16) {
+				colourButtons.get(event.item.getEntityItem().getItemDamage()).enabled = true;
+			}
+		}
+	}
+	
 	private void checkValidOperation() {
 		if(activeLocation >= 0 && activeColour >= 0 && activeImage >= 0) {
 			submitButton.enabled = true;
@@ -169,10 +203,40 @@ public class GuiTattooNeedle extends GuiScreen
 		}
 	}
 	
-	public boolean doesGuiPauseGame()
-    {
-        return false;
-    }
+	private void updateImageButtons(int locationId) {
+		List<Integer> validTattoos = TattooHandler.getValidTattoosForLocation(locationId);
+		for(int i=0; i<TattooConstants.ID_COUNT; i++) {
+			if(i < validTattoos.size()) {
+				if(activeColour >= 0) {
+					imageButtons.get(i).setInternalRect(TattooHandler.tattoos[validTattoos.get(i)].tattooImage, ItemDye.dyeColors[colourButtons.get(activeColour).getSelectionId()]);
+				} else {
+					imageButtons.get(i).setInternalTexture(TattooHandler.tattoos[validTattoos.get(i)].tattooImage);
+				}
+				
+				imageButtons.get(i).enabled = true;
+				imageButtons.get(i).setSelectionId(validTattoos.get(i));
+			}
+			else {
+				imageButtons.get(i).setInternalTexture(null);
+				imageButtons.get(i).enabled = false;
+				imageButtons.get(i).setSelectionId(-1);
+			}
+		}
+	}
+	
+	private void updateColourButtons() {
+		for(GuiButtonSelectableDisplay button : colourButtons) {
+			button.enabled = false;
+		}
+		for(ItemStack stack : player.inventory.mainInventory) {
+			if(stack == null) continue;
+			if(stack.getItem() == Item.dyePowder) {
+				if(stack.getItemDamage() < 16) {
+					colourButtons.get(stack.getItemDamage()).enabled = true;
+				}
+			}
+		}
+	}
 	
 	private void closeGui() {
 		this.mc.displayGuiScreen((GuiScreen)null);

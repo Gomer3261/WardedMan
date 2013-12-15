@@ -45,9 +45,9 @@ public class GuiButtonSelectableDisplay extends GuiButtonSelectable
 	
 	public void drawInternalTexturedModalRect(int par1, int par2, int par5, int par6)
     {
-		int r = (this.internalColour >> 16) & 255; 
-		int g = (this.internalColour >> 8) & 255;
-		int b = this.internalColour & 255;
+		int r = (this.internalColour >> 16) & 255; if(!enabled) r = ((r - 120) < 0) ? 0 : r - 120;
+		int g = (this.internalColour >> 8) & 255; if(!enabled) g = ((g - 120) < 0) ? 0 : g - 120;
+		int b = this.internalColour & 255; if(!enabled) b = ((b - 120) < 0) ? 0 : b - 120;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque(r, g, b);

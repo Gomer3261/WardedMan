@@ -38,6 +38,10 @@ public class GuiButtonSelectable extends GuiButtonModal
 		return selectId;
 	}
 	
+	public void setSelectionId(int id) {
+		selectId = id;
+	}
+	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}

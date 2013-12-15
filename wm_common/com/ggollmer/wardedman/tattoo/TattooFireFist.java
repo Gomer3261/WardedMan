@@ -3,13 +3,12 @@ package com.ggollmer.wardedman.tattoo;
 import com.ggollmer.wardedman.lib.TattooConstants;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-public class TattooIronFist extends Tattoo
+public class TattooFireFist extends Tattoo
 {
-	public TattooIronFist(int id, String name) {
+	public TattooFireFist(int id, String name) {
 		super(id, name);
 		
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_PALM_LOCATION_ID, id);
@@ -27,7 +26,7 @@ public class TattooIronFist extends Tattoo
 		{
 			int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
 			if(tattooCount > 0) {
-				event.target.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), 1 * tattooCount);
+				event.target.setFire(5*tattooCount);
 			}
 		}
 	}

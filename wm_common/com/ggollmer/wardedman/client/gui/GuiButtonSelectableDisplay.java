@@ -8,11 +8,13 @@ public class GuiButtonSelectableDisplay extends GuiButtonSelectable
 {
 	protected ResourceLocation internalTexture;
 	protected int internalColour;
+	public boolean darkenOnDisable;
 	
 	public GuiButtonSelectableDisplay(int id, int selectId, int x, int y, int hx, int hy, int dx, int dy, int sx, int sy, int width, int height,
 			ResourceLocation baseTexture) {
 		super(id, selectId, x, y, hx, hy, dx, dy, sx, sy, width, height, baseTexture);
 		this.internalTexture = null;
+		this.darkenOnDisable = true;
 	}
 	
 	public GuiButtonSelectableDisplay setInternalTexture(ResourceLocation internalText) {
@@ -45,9 +47,9 @@ public class GuiButtonSelectableDisplay extends GuiButtonSelectable
 	
 	public void drawInternalTexturedModalRect(int par1, int par2, int par5, int par6)
     {
-		int r = (this.internalColour >> 16) & 255; if(!enabled) r = ((r - 120) < 0) ? 0 : r - 120;
-		int g = (this.internalColour >> 8) & 255; if(!enabled) g = ((g - 120) < 0) ? 0 : g - 120;
-		int b = this.internalColour & 255; if(!enabled) b = ((b - 120) < 0) ? 0 : b - 120;
+		int r = (this.internalColour >> 16) & 255; if(!enabled && darkenOnDisable) r = ((r - 120) < 0) ? 0 : r - 120;
+		int g = (this.internalColour >> 8) & 255; if(!enabled && darkenOnDisable) g = ((g - 120) < 0) ? 0 : g - 120;
+		int b = this.internalColour & 255; if(!enabled && darkenOnDisable) b = ((b - 120) < 0) ? 0 : b - 120;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque(r, g, b);

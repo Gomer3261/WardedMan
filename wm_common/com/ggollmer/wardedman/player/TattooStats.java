@@ -85,6 +85,9 @@ public class TattooStats
 		if(tattooValues.length != TattooConstants.LOCATION_COUNT) {
 			int[] oldData = tattooValues.clone();
 			tattooValues = new int[TattooConstants.LOCATION_COUNT];
+			for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
+				tattooValues[i] = -1;
+			}
 			for(int i=0; i<tattooValues.length && i<oldData.length; i++) {
 				tattooValues[i] = oldData[i];
 			}
@@ -105,5 +108,12 @@ public class TattooStats
 				tattooColours[i] = oldData[i];
 			}
 		}
+		
+		/*tattooValues = new int[TattooConstants.LOCATION_COUNT];
+		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
+			tattooValues[i] = -1;
+		}
+		tattooCounts = new int[TattooConstants.ID_COUNT];
+		tattooColours = new int[TattooConstants.LOCATION_COUNT];*/
 	}
 }

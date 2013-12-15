@@ -31,7 +31,7 @@ public class TattooDamageReduction extends Tattoo
 		if(event.entity instanceof EntityPlayer) {
 			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entity, this.id);
 			if(tattooCount > 0) {
-				event.ammount = event.ammount * 20.0f/tattooCount;
+				event.ammount -= (event.ammount/12f) * tattooCount;
 			}
 		}
 	}

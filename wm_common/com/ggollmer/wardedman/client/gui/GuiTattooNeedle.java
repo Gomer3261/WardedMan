@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.core.helper.LocalizationHelper;
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
 import com.ggollmer.wardedman.network.packet.PacketTattooRequest;
+import com.ggollmer.wardedman.player.TattooStats;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -83,6 +85,12 @@ public class GuiTattooNeedle extends GuiScreen
         						xOffset + X_TATTOO_COORDS[i], yOffset + Y_TATTOO_COORDS[i],
         						176, 84, 176, 108, 176, 96, 12, 12,
         						NEEDLE_GUI_LOCATION));
+        	TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(player.username);
+        	locationButtons.get(i).darkenOnDisable = false;
+        	if(stats.getTattooId(i) != -1) {
+        		locationButtons.get(i).setInternalRect(TattooHandler.tattoos[stats.getTattooId(i)].tattooImage, stats.getTattooColour(i));
+        		locationButtons.get(i).enabled = false;
+        	}
         	buttonList.add(locationButtons.get(i));
         }
         
@@ -146,7 +154,10 @@ public class GuiTattooNeedle extends GuiScreen
 			closeGui();
 		}
 		else if(button == submitButton) {
-			submitTattooRequest(activeLocation, activeImage, activeColour);
+			submitTattooRequest(locationButtons.get(activeLocation).getSelectionId(),
+					imageButtons.get(activeImage).getSelectionId(),
+					colourButtons.get(activeColour).getSelectionId());
+			closeGui();
 		}
 		
 		for(int i=0; i < TattooConstants.LOCATION_COUNT; i++) {
@@ -250,6 +261,6 @@ public class GuiTattooNeedle extends GuiScreen
 	
 	private void submitTattooRequest(int tattooLocation, int tattooId, int tattooColour) {
 		LogHelper.debugLog("Sending tattoo request!");
-		PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketTattooRequest(this.player.username, tattooId, tattooLocation, tattooColour)));
+		PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketTattooRequest(this.player.username, tattooLocation, tattooId, tattooColour)));
 	}
 }

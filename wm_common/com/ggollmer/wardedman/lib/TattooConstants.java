@@ -27,6 +27,9 @@ public class TattooConstants
 	public static final int STONE_FIST_ID = 5;
 	public static final String STONE_FIST_NAME = "stoneFist";
 	
+	public static final int CHISELED_FIST_ID = 6;
+	public static final String CHISELED_FIST_NAME = "chiseledFist";
+	
 	/* Tattoo Locations */
 	public static final String FACE_LOCATION_NAME = "tattoo.face";
 	public static final int FACE_LOCATION_ID = 0;

@@ -18,6 +18,9 @@ public class TattooConstants
 	public static final int FEATHER_FALLING_ID = 2;
 	public static final String FEATHER_FALLING_NAME = "featherFalling";
 	
+	public static final int IRON_FIST_ID = 3;
+	public static final String IRON_FIST_NAME = "ironFist";
+	
 	/* Tattoo Locations */
 	public static final String FACE_LOCATION_NAME = "tattoo.face";
 	public static final int FACE_LOCATION_ID = 0;

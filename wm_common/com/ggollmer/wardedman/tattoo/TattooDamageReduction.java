@@ -3,7 +3,6 @@ package com.ggollmer.wardedman.tattoo;
 import com.ggollmer.wardedman.lib.TattooConstants;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -29,7 +28,7 @@ public class TattooDamageReduction extends Tattoo
 	
 	@ForgeSubscribe
 	public void onEntityHurt(LivingHurtEvent event) {
-		if(event.entity instanceof EntityPlayer && event.source == DamageSource.generic) {
+		if(event.entity instanceof EntityPlayer && !event.source.isFireDamage() && !event.source.isUnblockable() && !event.source.isProjectile() && !event.source.isMagicDamage()) {
 			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entity, this.id);
 			if(tattooCount > 0) {
 				event.ammount -= (event.ammount/12f) * tattooCount;

@@ -12,43 +12,36 @@ import com.ggollmer.wardedman.network.PacketTypeHandler;
 
 import cpw.mods.fml.common.network.Player;
 
-public class PacketTattooRequest extends PacketWardedMan
+public class PacketDyePickup extends PacketWardedMan
 {
-	public int id, location, colour;
 	public String username;
+	public int damage;
 	
-	public PacketTattooRequest()
-	{
-		super(PacketTypeHandler.TATTOOREQ, false);
+	public PacketDyePickup() {
+		super(PacketTypeHandler.DYEPICKUP, false);
 	}
 	
-	public PacketTattooRequest(String username, int location, int id, int colour) {
-		super(PacketTypeHandler.TATTOOREQ, false);
+	public PacketDyePickup(String username, int damage) {
+		super(PacketTypeHandler.DYEPICKUP, false);
 		this.username = username;
-		this.location = location;
-		this.id = id;
-		this.colour = colour;
+		this.damage = damage;
 	}
 	
 	@Override
 	public void readData(DataInputStream data) throws IOException {
 		username = data.readUTF();
-		location = data.readInt();
-		id = data.readInt();
-		colour = data.readInt();
+		damage = data.readInt();
     }
 
 	@Override
     public void writeData(DataOutputStream data) throws IOException {
 		data.writeUTF(username);
-		data.writeInt(location);
-		data.writeInt(id);
-		data.writeInt(colour);
+		data.writeInt(damage);
     }
 
 	@Override
     public void execute(INetworkManager network, Player player) {
-		LogHelper.debugLog("TattooRequestPacket -- Handling");
-		WardedMan.proxy.handleTattooRequestPack(username, location, id, colour);
+		LogHelper.debugLog("PacketDyePickup -- received");
+		WardedMan.proxy.handleDyePickupPacket(username, damage);
     }
 }

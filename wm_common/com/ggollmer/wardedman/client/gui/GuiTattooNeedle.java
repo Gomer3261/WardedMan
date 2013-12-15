@@ -26,8 +26,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class GuiTattooNeedle extends GuiScreen
 {
@@ -195,19 +193,9 @@ public class GuiTattooNeedle extends GuiScreen
         return false;
     }
 	
-	@Override
-	public void onGuiClosed() {
-		super.onGuiClosed();
-		MinecraftForge.EVENT_BUS.unregister(this);
-	}
-	
-	@ForgeSubscribe
-	public void onItemPickup(EntityItemPickupEvent event) {
-		if(event.item.getEntityItem().getItem() == Item.dyePowder) {
-			if(event.item.getEntityItem().getItemDamage() < 16) {
-				colourButtons.get(event.item.getEntityItem().getItemDamage()).enabled = true;
-			}
-		}
+	public void notifyPickup(int damage)
+	{
+		colourButtons.get(damage).enabled = true;
 	}
 	
 	private void checkValidOperation() {

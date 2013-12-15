@@ -12,18 +12,18 @@ import com.ggollmer.wardedman.network.PacketTypeHandler;
 
 import cpw.mods.fml.common.network.Player;
 
-public class PacketTattooRequest extends PacketWardedMan
+public class PacketTattooUpdate extends PacketWardedMan
 {
 	public int id, location, colour;
 	public String username;
 	
-	public PacketTattooRequest()
+	public PacketTattooUpdate()
 	{
-		super(PacketTypeHandler.TATTOOREQ, false);
+		super(PacketTypeHandler.TATTOOUPDATE, false);
 	}
 	
-	public PacketTattooRequest(String username, int location, int id, int colour) {
-		super(PacketTypeHandler.TATTOOREQ, false);
+	public PacketTattooUpdate(String username, int location, int id, int colour) {
+		super(PacketTypeHandler.TATTOOUPDATE, false);
 		this.username = username;
 		this.location = location;
 		this.id = id;
@@ -48,7 +48,7 @@ public class PacketTattooRequest extends PacketWardedMan
 
 	@Override
     public void execute(INetworkManager network, Player player) {
-		LogHelper.debugLog("TattooRequestPacket -- Handling");
-		WardedMan.proxy.handleTattooRequestPack(username, location, id, colour);
+		LogHelper.debugLog("TattooUpdatedPacket -- Handling");
+		WardedMan.proxy.handleTattooUpdatePacket(username, location, id, colour);
     }
 }

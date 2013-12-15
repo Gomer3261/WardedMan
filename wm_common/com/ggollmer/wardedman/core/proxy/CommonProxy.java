@@ -1,18 +1,17 @@
 package com.ggollmer.wardedman.core.proxy;
 
 import com.ggollmer.wardedman.WardedMan;
+import com.ggollmer.wardedman.core.helper.LogHelper;
+import com.ggollmer.wardedman.item.WardedManItems;
+import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.player.TattooStats;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.relauncher.Side;
 
-public class CommonProxy implements IGuiHandler
+public class CommonProxy
 {
 	public void registerSoundHandler()
 	{
@@ -26,44 +25,46 @@ public class CommonProxy implements IGuiHandler
     {
     }
 	
-	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	/* Packet handling helpers! */
 
-	public void handleTattooRequestPacket(String username, int location, int id, int colour) {
-		//TODO: Move to some sort of file in charge of client side data?
-		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-			TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
-			if(stats != null) {
-				stats.applyTattoo(location, id, ItemDye.dyeColors[colour]);
-				EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
-				if(player != null) {
+	public void handleTattooUpdatePacket(String username, int location, int id, int colour) {
+	}
+	
+	public void handleTattooDataPacket(PacketTattooData packet) {}
+
+	public void handleTattooRequestPack(String username, int location, int id,
+			int colour)
+	{
+		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
+		if(stats != null) {
+			LogHelper.debugLog("Tattoo Stats exist, moving on.");
+			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+			if(player != null) {
+				LogHelper.debugLog("Found the player, this is cool.");
+				boolean canTattooThemselves = false;
+				if(player.inventory.getStackInSlot(player.inventory.currentItem).getItem() == WardedManItems.tattooNeedle) {
+					LogHelper.debugLog("Player is holding a needle that's cool.");
 					for(int i=0; i<player.inventory.mainInventory.length; i++) {
 						if(player.inventory.mainInventory[i] != null) {
 							if(player.inventory.mainInventory[i].getItem() == Item.dyePowder) {
 								if(player.inventory.mainInventory[i].getItemDamage() == colour) {
+									LogHelper.debugLog("Found the dye that the player used!");
+									canTattooThemselves = true;
 									player.inventory.decrStackSize(i, 1);
+									break;
 								}
 							}
 						}
 					}
-					player.inventory.decrStackSize(player.inventory.currentItem, 1);
+					if(canTattooThemselves) {
+						LogHelper.debugLog("Tattooing time!");
+						player.inventory.decrStackSize(player.inventory.currentItem, 1);
+						stats.updateTattoo(location, id, ItemDye.dyeColors[colour]);
+					}
 				}
 			}
 		}
 	}
+
+	public void handleDyePickupPacket(String username, int damage) {}
 }

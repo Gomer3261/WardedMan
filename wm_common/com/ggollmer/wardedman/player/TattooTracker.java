@@ -1,13 +1,19 @@
 package com.ggollmer.wardedman.player;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
+import com.ggollmer.wardedman.network.PacketTypeHandler;
+import com.ggollmer.wardedman.network.packet.PacketTattooData;
+import com.ggollmer.wardedman.network.packet.PacketTattooUpdate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IPlayerTracker;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
 
 public class TattooTracker implements IPlayerTracker
 {
@@ -22,8 +28,13 @@ public class TattooTracker implements IPlayerTracker
             playerTags.setCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME, new NBTTagCompound());
         }
 		TattooStats stats = new TattooStats();
-        stats.player = new WeakReference<EntityPlayer>(player);
+        stats.username = player.username;
         stats.loadFromNBT(player);
+        
+        for(TattooStats outgoingStats : tattooStatsMap.values()) {
+        	PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(outgoingStats.assemblePacket()), (Player)player);
+        }
+        PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(stats.assemblePacket()));
         
         tattooStatsMap.put(player.username, stats);
 	}
@@ -43,8 +54,15 @@ public class TattooTracker implements IPlayerTracker
 	@Override
 	public void onPlayerRespawn(EntityPlayer player)
 	{
-		TattooStats stats = getPlayerTattooStats(player.username);
-        stats.player = new WeakReference<EntityPlayer>(player);
+	}
+	
+	public void handleTattooDataPacket(PacketTattooData packet) {
+		if(tattooStatsMap.contains(packet.username)) {
+			tattooStatsMap.get(packet.username).loadFromPacket(packet);
+		}
+		else {
+			tattooStatsMap.put(packet.username, new TattooStats(packet));
+		}
 	}
 	
 	public TattooStats getPlayerTattooStats(String username) {
@@ -56,12 +74,9 @@ public class TattooTracker implements IPlayerTracker
 		}
 	}
 	
-	public EntityPlayer getEntityPlayer(String username) {
-		if(tattooStatsMap.containsKey(username)) {
-			return tattooStatsMap.get(username).player.get();
-		}
-		else {
-			return null;
+	public void sendTattooUpdate(String username, int location, int id, int colour) {
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketTattooUpdate(username, location, id, colour)));
 		}
 	}
 

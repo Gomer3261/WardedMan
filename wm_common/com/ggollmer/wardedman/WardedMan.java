@@ -3,6 +3,7 @@ package com.ggollmer.wardedman;
 import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.ggollmer.wardedman.core.handler.ConfigurationHandler;
 import com.ggollmer.wardedman.core.handler.GuiHandler;
@@ -12,6 +13,7 @@ import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
 import com.ggollmer.wardedman.item.WardedManItems;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.PacketHandler;
+import com.ggollmer.wardedman.player.DropMonitor;
 import com.ggollmer.wardedman.player.TattooTracker;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
 
@@ -61,6 +63,7 @@ public class WardedMan
 	public static final CreativeTabs tabsWardedMan = new CreativeTabWardedMan(CreativeTabs.getNextID(), Reference.MOD_ID);
 	
 	public static TattooTracker tattooTracker;
+	public static DropMonitor dropMonitor;
 	
 	@EventHandler
     public void invalidFingerprint(FMLFingerprintViolationEvent event)
@@ -89,6 +92,9 @@ public class WardedMan
         GameRegistry.registerPlayerTracker(tattooTracker);
         
         TattooHandler.init();
+        
+        dropMonitor = new DropMonitor();
+        MinecraftForge.EVENT_BUS.register(dropMonitor);
 	}
 	
 	/**

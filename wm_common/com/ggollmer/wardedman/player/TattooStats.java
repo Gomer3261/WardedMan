@@ -1,10 +1,9 @@
 package com.ggollmer.wardedman.player;
 
-import java.lang.ref.WeakReference;
-
-import com.ggollmer.wardedman.core.helper.LogHelper;
+import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
+import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TattooStats
 {
-	public WeakReference<EntityPlayer> player;
+	public String username;
 	
 	public int[] tattooValues;
 	public int[] tattooCounts;
@@ -27,9 +26,11 @@ public class TattooStats
 		tattooColours = new int[TattooConstants.LOCATION_COUNT];
 	}
 	
-	public boolean applyTattoo(int tattooLocation, int tattooId, int tattooColour) {
-		
-		LogHelper.debugLog("Player request a tattoo be applied!");
+	public TattooStats(PacketTattooData packet) {
+		this.loadFromPacket(packet);
+	}
+
+	public boolean updateTattoo(int tattooLocation, int tattooId, int tattooColour) {
 		
 		if(tattooValues[tattooLocation] != -1) return false;
 		if(TattooHandler.tattoos[tattooId] == null) return false;
@@ -38,7 +39,7 @@ public class TattooStats
 		tattooValues[tattooLocation] = tattooId;
 		tattooColours[tattooLocation] = tattooColour;
 		
-		if(TattooHandler.tattoos[tattooId].tattooCanBeActivated()) TattooHandler.tattoos[tattooId].onTattooActivation(player.get(), tattooCounts[tattooId]);
+		WardedMan.tattooTracker.sendTattooUpdate(this.username, tattooLocation, tattooId, tattooColour);
 		
 		return true;
 	}
@@ -115,5 +116,23 @@ public class TattooStats
 		}
 		tattooCounts = new int[TattooConstants.ID_COUNT];
 		tattooColours = new int[TattooConstants.LOCATION_COUNT];*/
+	}
+	
+	public PacketTattooData assemblePacket() {
+		return new PacketTattooData(this.username, this.tattooValues, this.tattooColours);
+	}
+	
+	public void loadFromPacket(PacketTattooData packet)
+	{
+		this.username = packet.username;
+		this.tattooValues = packet.tattooValues.clone();
+		this.tattooColours = packet.tattooColours.clone();
+		
+		tattooCounts = new int[TattooConstants.ID_COUNT];
+		for(int i=0; i<tattooValues.length; i++) {
+			if(tattooValues[i] >= 0) {
+				tattooCounts[tattooValues[i]]++;
+			}
+		}
 	}
 }

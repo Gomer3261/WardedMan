@@ -6,9 +6,14 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.ggollmer.wardedman.core.helper.LocalizationHelper;
+import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.lib.TattooConstants;
+import com.ggollmer.wardedman.network.PacketTypeHandler;
+import com.ggollmer.wardedman.network.packet.PacketTattooRequest;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -244,6 +249,7 @@ public class GuiTattooNeedle extends GuiScreen
 	}
 	
 	private void submitTattooRequest(int tattooLocation, int tattooId, int tattooColour) {
-		// TODO This should send out a request to the server to apply a tattoo!
+		LogHelper.debugLog("Sending tattoo request!");
+		PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketTattooRequest(this.player.username, tattooId, tattooLocation, tattooColour)));
 	}
 }

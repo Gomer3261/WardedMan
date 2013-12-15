@@ -2,6 +2,7 @@ package com.ggollmer.wardedman.player;
 
 import java.lang.ref.WeakReference;
 
+import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
@@ -27,6 +28,9 @@ public class TattooStats
 	}
 	
 	public boolean applyTattoo(int tattooLocation, int tattooId, int tattooColour) {
+		
+		LogHelper.debugLog("Player request a tattoo be applied!");
+		
 		if(tattooValues[tattooLocation] != -1) return false;
 		if(TattooHandler.tattoos[tattooId] == null) return false;
 		
@@ -75,5 +79,31 @@ public class TattooStats
 		tattooValues = wmTags.getIntArray(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME);
 		tattooCounts = wmTags.getIntArray(PlayerNBTNames.TATTOO_AMOUNT_LIST_NAME);
 		tattooColours = wmTags.getIntArray(PlayerNBTNames.TATTOO_COLOUR_LIST_NAME);
+		
+		/* Ensuring Data is Correct */
+		
+		if(tattooValues.length != TattooConstants.LOCATION_COUNT) {
+			int[] oldData = tattooValues.clone();
+			tattooValues = new int[TattooConstants.LOCATION_COUNT];
+			for(int i=0; i<tattooValues.length && i<oldData.length; i++) {
+				tattooValues[i] = oldData[i];
+			}
+		}
+		
+		if(tattooCounts.length != TattooConstants.ID_COUNT) {
+			int[] oldData = tattooCounts.clone();
+			tattooCounts = new int[TattooConstants.ID_COUNT];
+			for(int i=0; i<tattooCounts.length && i<oldData.length; i++) {
+				tattooCounts[i] = oldData[i];
+			}
+		}
+		
+		if(tattooColours.length != TattooConstants.LOCATION_COUNT) {
+			int[] oldData = tattooColours.clone();
+			tattooColours = new int[TattooConstants.LOCATION_COUNT];
+			for(int i=0; i<tattooColours.length && i<oldData.length; i++) {
+				tattooColours[i] = oldData[i];
+			}
+		}
 	}
 }

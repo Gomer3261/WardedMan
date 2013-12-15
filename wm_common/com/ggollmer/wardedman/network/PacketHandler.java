@@ -1,5 +1,7 @@
 package com.ggollmer.wardedman.network;
 
+import com.ggollmer.wardedman.network.packet.PacketWardedMan;
+
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -23,6 +25,8 @@ public class PacketHandler implements IPacketHandler
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player)
 	{
+		PacketWardedMan packetWardedMan = PacketTypeHandler.buildPacket(packet.data);
 		
+		packetWardedMan.execute(manager, player);
 	}
 }

@@ -18,6 +18,7 @@ public class TattooHandler
 	public static List<List<Integer>> validTattoos = new ArrayList<List<Integer>>(TattooConstants.LOCATION_COUNT);
 	
 	public static Tattoo tattooDamageReduction;
+	public static Tattoo tattooFireResistance;
 	
 	public static void init() {
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
@@ -70,8 +71,10 @@ public class TattooHandler
 		IDToName.put(TattooConstants.LEFT_CALF_LOCATION_ID, TattooConstants.LEFT_CALF_LOCATION_NAME);
 		
 		tattooDamageReduction = new TattooDamageReduction(TattooConstants.DAMAGE_REDUCTION_ID, TattooConstants.DAMAGE_REDUCTION_NAME);
+		tattooFireResistance = new TattooFireResistance(TattooConstants.FIRE_RESISTANCE_ID,	TattooConstants.FIRE_RESISTANCE_NAME);
 		
 		MinecraftForge.EVENT_BUS.register(tattooDamageReduction);
+		MinecraftForge.EVENT_BUS.register(tattooFireResistance);
 	}
 	
 	public static List<Integer> getValidTattoosForLocation(int location) {

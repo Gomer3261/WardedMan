@@ -12,6 +12,9 @@ public class TattooConstants
 	public static final int DAMAGE_REDUCTION_ID = 0;
 	public static final String DAMAGE_REDUCTION_NAME = "damageReduction";
 	
+	public static final int FIRE_RESISTANCE_ID = 1;
+	public static final String FIRE_RESISTANCE_NAME = "fireResistance";
+	
 	/* Tattoo Locations */
 	public static final String FACE_LOCATION_NAME = "tattoo.face";
 	public static final int FACE_LOCATION_ID = 0;

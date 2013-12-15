@@ -30,6 +30,15 @@ public class TattooConstants
 	public static final int CHISELED_FIST_ID = 6;
 	public static final String CHISELED_FIST_NAME = "chiseledFist";
 	
+	public static final int THORNS_ID = 7;
+	public static final String THORNS_NAME = "thorns";
+	
+	public static final int MAGIC_RESIST_ID = 8;
+	public static final String MAGIC_RESIST_NAME = "magicResist";
+	
+	public static final int PROJECTILE_PROTECTION_ID = 9;
+	public static final String PROJECTILE_PROTECTION_NAME = "projectileProtection";
+	
 	/* Tattoo Locations */
 	public static final String FACE_LOCATION_NAME = "tattoo.face";
 	public static final int FACE_LOCATION_ID = 0;

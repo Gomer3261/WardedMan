@@ -37,13 +37,10 @@ public class CommonProxy
 	{
 		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
 		if(stats != null) {
-			LogHelper.debugLog("Tattoo Stats exist, moving on.");
 			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
 			if(player != null) {
-				LogHelper.debugLog("Found the player, this is cool.");
 				boolean canTattooThemselves = false;
 				if(player.inventory.getStackInSlot(player.inventory.currentItem).getItem() == WardedManItems.tattooNeedle) {
-					LogHelper.debugLog("Player is holding a needle that's cool.");
 					for(int i=0; i<player.inventory.mainInventory.length; i++) {
 						if(player.inventory.mainInventory[i] != null) {
 							if(player.inventory.mainInventory[i].getItem() == Item.dyePowder) {

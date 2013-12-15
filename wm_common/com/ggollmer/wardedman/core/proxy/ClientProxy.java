@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 
 import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.client.gui.GuiTattooNeedle;
-import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.player.TattooStats;
 
@@ -23,8 +22,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void handleTattooUpdatePacket(String username, int location, int id, int colour) {
 		if(Minecraft.getMinecraft().thePlayer.worldObj.isRemote) {
-			LogHelper.debugLog("Handling update packet for client!");
-			
 			TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
 			if(stats != null) {
 				stats.updateTattoo(location, id, colour);
@@ -34,7 +31,7 @@ public class ClientProxy extends CommonProxy
 	
 	@Override
 	public void handleDyePickupPacket(String username, int damage) {
-		if(Minecraft.getMinecraft().thePlayer.username == username) {
+		if(Minecraft.getMinecraft().thePlayer.username.equals(username)) {
 			if(Minecraft.getMinecraft().currentScreen != null) {
 				if(Minecraft.getMinecraft().currentScreen instanceof GuiTattooNeedle) {
 					((GuiTattooNeedle)Minecraft.getMinecraft().currentScreen).notifyPickup(damage);

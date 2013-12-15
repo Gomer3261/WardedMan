@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.core.helper.LocalizationHelper;
-import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
@@ -248,7 +247,6 @@ public class GuiTattooNeedle extends GuiScreen
 	}
 	
 	private void submitTattooRequest(int tattooLocation, int tattooId, int tattooColour) {
-		LogHelper.debugLog("Sending tattoo request!");
 		PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketTattooRequest(this.player.username, tattooLocation, tattooId, tattooColour)));
 	}
 }

@@ -1,6 +1,5 @@
 package com.ggollmer.wardedman.player;
 
-import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
 import com.ggollmer.wardedman.network.packet.PacketDyePickup;
 
@@ -16,7 +15,6 @@ public class DropMonitor
 	public void checkDyePickup(EntityItemPickupEvent event) {
 		if(event.item.getEntityItem().getItem() == Item.dyePowder) {
 			if(event.item.getEntityItem().getItemDamage() < 16) {
-				LogHelper.debugLog("World is remote? :" + event.entityPlayer.worldObj.isRemote);
 				PacketDispatcher.sendPacketToPlayer(PacketTypeHandler.populatePacket(new PacketDyePickup(event.entityPlayer.username, event.item.getEntityItem().getItemDamage())), (Player)event.entityPlayer);
 			}
 		}

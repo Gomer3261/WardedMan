@@ -16,6 +16,7 @@ import com.ggollmer.wardedman.network.PacketHandler;
 import com.ggollmer.wardedman.player.DropMonitor;
 import com.ggollmer.wardedman.player.TattooTracker;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
+import com.ggollmer.wardedman.village.VillageHandler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -92,6 +93,8 @@ public class WardedMan
         GameRegistry.registerPlayerTracker(tattooTracker);
         
         TattooHandler.init();
+        
+        VillageHandler.init();
         
         dropMonitor = new DropMonitor();
         MinecraftForge.EVENT_BUS.register(dropMonitor);

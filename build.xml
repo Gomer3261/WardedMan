@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <project name="WardedMan" default="build">
 	
-	<property file="build.properties" prefix="build">
-	<property file="build_number.properties" prefix="build_number">
+	<property file="build.properties" prefix="build" />
+	<property file="build_number.properties" prefix="build_number" />
 	
 	<target name="clean">
 		<delete file="${build.dir.mcp}\src\minecraft\mcmod.info" />
@@ -13,7 +13,7 @@
 	
 	<target name="increment_build_number">
 		<propertyfile file="build_number.properties">
-			<entry key="build_number" type="int" operation="+" default="1" \>
+			<entry key="build_number" type="int" operation="+" default="1" />
 		</propertyfile>
 	</target>
 	
@@ -26,7 +26,7 @@
 	<target name="replace_tokens">
 		<replace file="${build.dir.mcp}\src\minecraft\mcmod.info" token="@VERSION@" value="${build.release.mod.version}" />
 		<replace dir="${build.dir.mcp}\src\minecraft\com\ggollmer" token="@VERSION@" value="${build.release.mod.version}" />
-		<replace dir="${build.dir.mcp}\src\minecraft\com\ggollmer" token="@FINGERPRINT@" value="${build.release.mod.fingerprint" />
+		<replace dir="${build.dir.mcp}\src\minecraft\com\ggollmer" token="@FINGERPRINT@" value="${build.release.mod.fingerprint}" />
 		<replace dir="${build.dir.mcp}\src\minecraft\com\ggollmer" token="@BUILD_NUMBER@" value="${build_number.build_number}" />
 	</target>
 	
@@ -65,7 +65,7 @@
 		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\WardedMan-Universal-${build.release.mod.version}-${build_number.build_number}.jar">
 			<fileset dir="${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
 			<fileset dir="${build.dir.mcp}\reobf\minecraft" />
-			<fileset dir="${build.dir.mod}\wm_resources" excludes="**/psd/**" />
+			<fileset dir="${build.dir.mod}\wm_resources" excludes="**/psds/**" />
 		</jar>
 		
 		<!-- Clean up the MCP source now that we are done -->
@@ -86,7 +86,7 @@
 		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\WardedMan-Universal-${build.release.mod.version}-${build_number.build_number}.jar">
 			<fileset dir="${build.dir.mcp}\src\minecraft\" includes="mcmod.info" />
 			<fileset dir="${build.dir.mcp}\reobf\minecraft" />
-			<fileset dir="${build.dir.mod}\inevera_resources" excludes="**/psd/**" />
+			<fileset dir="${build.dir.mod}\wm_resources" excludes="**/psds/**" />
 		</jar>
 		
 		<!-- Sign the finished jar -->

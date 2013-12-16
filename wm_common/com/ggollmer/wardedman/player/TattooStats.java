@@ -111,12 +111,12 @@ public class TattooStats
 		}
 		
 		// TODO: Remove this stuffs!
-		tattooValues = new int[TattooConstants.LOCATION_COUNT];
+		/*tattooValues = new int[TattooConstants.LOCATION_COUNT];
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
 			tattooValues[i] = -1;
 		}
 		tattooCounts = new int[TattooConstants.ID_COUNT];
-		tattooColours = new int[TattooConstants.LOCATION_COUNT];
+		tattooColours = new int[TattooConstants.LOCATION_COUNT];*/
 	}
 	
 	public PacketTattooData assemblePacket() {

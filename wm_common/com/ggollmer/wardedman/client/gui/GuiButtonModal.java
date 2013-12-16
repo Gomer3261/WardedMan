@@ -41,7 +41,7 @@ public class GuiButtonModal extends GuiButton
 	}
 	
 	public GuiButtonModal setTooltip(List<String> toolTipText) {
-		if(tooltip != null) {
+		if(toolTipText != null) {
 			for (int k = 0; k < toolTipText.size(); ++k)
 	        {
 	            if (k == 0)

@@ -24,6 +24,11 @@ public class CommonProxy
     public void registerTileEntities()
     {
     }
+    
+    public void registerVillagerSkins()
+	{
+		/* Why would care about skins? */
+	}
 	
 	/* Packet handling helpers! */
 

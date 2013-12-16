@@ -1,17 +1,27 @@
 package com.ggollmer.wardedman.core.proxy;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 
 import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.client.gui.GuiTattooNeedle;
+import com.ggollmer.wardedman.lib.Reference;
+import com.ggollmer.wardedman.lib.VillageConstants;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.player.TattooStats;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy
 {
+	@Override
+	public void registerVillagerSkins()
+	{
+		VillagerRegistry.instance().registerVillagerSkin(VillageConstants.TATTOO_ARTIST_ID, new ResourceLocation(Reference.MOD_ID, VillageConstants.TATTOO_ARTIST_TEXTURE_LOCATION));
+	}
+	
 	@Override
 	public void handleTattooDataPacket(PacketTattooData packet) {
 		if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {

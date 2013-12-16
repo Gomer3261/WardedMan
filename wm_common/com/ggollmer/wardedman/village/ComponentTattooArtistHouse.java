@@ -6,7 +6,6 @@ import java.util.Random;
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.VillageConstants;
 
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.ComponentVillageHouse2;
@@ -18,6 +17,10 @@ public class ComponentTattooArtistHouse extends ComponentVillageHouse2
 {
 	private int villagersSpawned=0;
 	
+	public ComponentTattooArtistHouse()
+    {
+    }
+	
 	public ComponentTattooArtistHouse(
 			ComponentVillageStartPiece par0ComponentVillageStartPiece,
 			int par7, Random par2Random,
@@ -26,6 +29,7 @@ public class ComponentTattooArtistHouse extends ComponentVillageHouse2
 		super(par0ComponentVillageStartPiece, par7, par2Random, structureboundingbox, par6);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static ComponentTattooArtistHouse func_74915_a(ComponentVillageStartPiece par0ComponentVillageStartPiece, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
     {
         StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 10, 6, 7, par6);

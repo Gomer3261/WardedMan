@@ -5,9 +5,13 @@
 	<entry key="tile.changeme.name">Text</entry>
 	
 	<entry key="item.tattooNeedle.name">Tattoo Needle</entry>
+	<entry key="item.enderDye.name">Ender Dye</entry>
+	<entry key="item.tattooRemover.name">Tattoo Remover</entry>
 	<entry key="itemGroup.wardedman">WardedMan</entry>
 	<entry key="gui.tattooNeedle.submit">Tattoo</entry>
 	<entry key="gui.tattooNeedle.cancel">Cancel</entry>
+	<entry key="gui.tattooRemover.submit">Remove</entry>
+	<entry key="gui.tattooRemover.cancel">Cancel</entry>
 	<entry key="tattoo.damageReduction.name">Damage Resistance</entry>
 	<entry key="tattoo.damageReduction.desc">Reduce incoming damage by 1/12th</entry>
 	<entry key="tattoo.fireResistance.name">Fire Resistance</entry>

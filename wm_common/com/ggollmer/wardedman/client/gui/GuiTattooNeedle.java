@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.core.helper.LocalizationHelper;
+import com.ggollmer.wardedman.lib.GuiConstants;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
@@ -28,7 +29,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class GuiTattooNeedle extends GuiScreen
 {
-	protected static final ResourceLocation NEEDLE_GUI_LOCATION = new ResourceLocation(Reference.MOD_ID, "textures/gui/tattooNeedleGui.png");
+	protected static final ResourceLocation NEEDLE_GUI_LOCATION = new ResourceLocation(Reference.MOD_ID, GuiConstants.TATTOO_NEEDLE_GUI_LOCATION);
 	
 	protected static final int[] X_TATTOO_COORDS = new int[]{25, 19, 31, 25, 7, 19, 32, 44, 19, 32, 75, 67, 83, 75, 69, 81, 56, 93, 68, 82, 69, 82};
 	protected static final int[] Y_TATTOO_COORDS = new int[]{10, 29, 29, 43, 63, 69, 69, 63, 109, 109, 9, 27, 27, 42, 57, 57, 63, 62, 74, 74, 94, 94};
@@ -128,8 +129,8 @@ public class GuiTattooNeedle extends GuiScreen
         	}
         }
         
-        buttonList.add(submitButton = new GuiButtonModal(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.submit"), NEEDLE_GUI_LOCATION));
-        buttonList.add(cancelButton = new GuiButtonModal(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString("gui.tattooNeedle.cancel"), NEEDLE_GUI_LOCATION));
+        buttonList.add(submitButton = new GuiButtonModal(0, xOffset + 132, yOffset + 126, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString(GuiConstants.TATTOO_NEEDLE_SUBMIT), NEEDLE_GUI_LOCATION));
+        buttonList.add(cancelButton = new GuiButtonModal(1, xOffset + 132, yOffset + 144, 176, 50, 176, 67, 39, 17, LocalizationHelper.getLocalizedString(GuiConstants.TATTOO_NEEDLE_CANCEL), NEEDLE_GUI_LOCATION));
         
         if(activeLocation >= 0) {
         	locationButtons.get(activeLocation).setSelected(true);

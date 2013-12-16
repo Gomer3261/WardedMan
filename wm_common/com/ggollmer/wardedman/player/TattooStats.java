@@ -109,6 +109,8 @@ public class TattooStats
 				tattooColours[i] = oldData[i];
 			}
 		}
+		
+		clearTattooData();
 	}
 	
 	public void clearTattooData() {

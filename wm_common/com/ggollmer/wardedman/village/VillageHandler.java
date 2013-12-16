@@ -1,6 +1,8 @@
 package com.ggollmer.wardedman.village;
 
+import net.minecraft.crash.CallableMinecraftVersion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.Reference;
@@ -18,5 +20,16 @@ public class VillageHandler
 		IVillageTradeHandler tradeHandler = new VillageTradeHandler();
 		VillagerRegistry.instance().registerVillageTradeHandler(VillageConstants.TATTOO_ARTIST_ID, tradeHandler);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageTattooArtistHandler());
+		try
+        {
+            if (new CallableMinecraftVersion(null).minecraftVersion().equals("1.6.4"))
+            {
+                MapGenStructureIO.func_143031_a(ComponentTattooArtistHouse.class, "WardedMan:TattoArtistStructure");
+            }
+        }
+        catch (Throwable e)
+        {
+
+        }
 	}
 }

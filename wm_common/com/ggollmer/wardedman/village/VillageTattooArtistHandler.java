@@ -3,6 +3,8 @@ package com.ggollmer.wardedman.village;
 import java.util.List;
 import java.util.Random;
 
+import com.ggollmer.wardedman.core.helper.LogHelper;
+
 import net.minecraft.world.gen.structure.ComponentVillageStartPiece;
 import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
@@ -14,7 +16,7 @@ public class VillageTattooArtistHandler implements IVillageCreationHandler
 	public StructureVillagePieceWeight getVillagePieceWeight(Random random,
 			int i)
 	{
-		return new StructureVillagePieceWeight(ComponentTattooArtistHouse.class, 30, i + random.nextInt(4));
+		return new StructureVillagePieceWeight(ComponentTattooArtistHouse.class, 100, i + random.nextInt(4));
 	}
 
 	@Override
@@ -29,6 +31,7 @@ public class VillageTattooArtistHandler implements IVillageCreationHandler
 			int p1, int p2, int p3, int p4, int p5)
 	{
 		// TODO Currently extending existing minecraft houses. Might be nice to create our own unique building after modjam.
+		LogHelper.debugLog("Spawning a Tattoo Artist House!");
 		return ComponentTattooArtistHouse.func_74915_a(startPiece, pieces, random, p1, p2, p3, p4, p5);
 	}
 

@@ -17,5 +17,6 @@ public class VillageHandler
 		VillagerRegistry.instance().registerVillagerSkin(VillageConstants.TATTOO_ARTIST_ID, new ResourceLocation(Reference.MOD_ID, VillageConstants.TATTOO_ARTIST_TEXTURE_LOCATION));
 		IVillageTradeHandler tradeHandler = new VillageTradeHandler();
 		VillagerRegistry.instance().registerVillageTradeHandler(VillageConstants.TATTOO_ARTIST_ID, tradeHandler);
+		VillagerRegistry.instance().registerVillageCreationHandler(new VillageTattooArtistHandler());
 	}
 }

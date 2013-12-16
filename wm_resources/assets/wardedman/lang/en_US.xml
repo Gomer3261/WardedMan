@@ -2,9 +2,52 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
 	<comment>English (en_US) Localization File</comment>
-	<entry key="item.tattooNeedle.name">Tattoo Needle</entry>
 	<entry key="tile.changeme.name">Text</entry>
+	
+	<entry key="item.tattooNeedle.name">Tattoo Needle</entry>
 	<entry key="itemGroup.wardedman">WardedMan</entry>
 	<entry key="gui.tattooNeedle.submit">Tattoo</entry>
 	<entry key="gui.tattooNeedle.cancel">Cancel</entry>
+	<entry key="tattoo.damageReduction.name">Damage Resistance</entry>
+	<entry key="tattoo.damageReduction.desc">Reduce incoming damage by 1/12th</entry>
+	<entry key="tattoo.fireResistance.name">Fire Resistance</entry>
+	<entry key="tattoo.fireResistance.desc">Reduce fire damage by 1/10th</entry>
+	<entry key="tattoo.featherFalling.name">Feather Falling</entry>
+	<entry key="tattoo.featherFalling.desc">Reduce fall damage by 1/5th</entry>
+	<entry key="tattoo.ironFist.name">Iron Fist</entry>
+	<entry key="tattoo.ironFist.desc">Deal and additional 1/4 heart when punching</entry>
+	<entry key="tattoo.fireFist.name">Flaming Fist</entry>
+	<entry key="tattoo.fireFist.desc">Ignite target for 2 seconds</entry>
+	<entry key="tattoo.stoneFist.name">Stone Fist</entry>
+	<entry key="tattoo.stoneFist.desc">Increase block break speed by 1/3rd</entry>
+	<entry key="tattoo.chiseledFist.name">Chisel Fist</entry>
+	<entry key="tattoo.chiseledFist.desc">Break stronger blocks with your hands</entry>
+	<entry key="tattoo.thorns.name">Thorns</entry>
+	<entry key="tattoo.thorns.desc">Deal 1/2 incoming damage to attackers</entry>
+	<entry key="tattoo.magicResist.name">Magic Resistance</entry>
+	<entry key="tattoo.magicResist.desc">Reduce incoming magic damage by 1/2</entry>
+	<entry key="tattoo.projectileProtection.name">Projectile Protection</entry>
+	<entry key="tattoo.projectileProtection.desc">Reduce damage from projectiles by 1/4</entry>
+	<entry key="tattoo.location.face">Forehead</entry>
+	<entry key="tattoo.location.chestRight">Right Pectoral</entry>
+	<entry key="tattoo.location.chestLeft">Left Pectoral</entry>
+	<entry key="tattoo.location.abdominal">Abdominal</entry>
+	<entry key="tattoo.location.palmRight">Right Palm</entry>
+	<entry key="tattoo.location.palmLeft">Left Palm</entry>
+	<entry key="tattoo.location.thighRight">Right Thigh</entry>
+	<entry key="tattoo.location.thighLeft">Left Thigh</entry>
+	<entry key="tattoo.location.footRight">Right Foot</entry>
+	<entry key="tattoo.location.footLeft">Left Foot</entry>
+	<entry key="tattoo.location.head">Head</entry>
+	<entry key="tattoo.location.shoulderRight">Right Shoulder</entry>
+	<entry key="tattoo.location.shoulderLeft">Left Shoulder</entry>
+	<entry key="tattoo.location.back">Back</entry>
+	<entry key="tattoo.location.glutealRight">Right Gluteal</entry>
+	<entry key="tattoo.location.glutealLeft">Left Gluteal</entry>
+	<entry key="tattoo.location.handRight">Right Hand</entry>
+	<entry key="tattoo.location.handLeft">Left Hand</entry>
+	<entry key="tattoo.location.hamRight">Right Hamstring</entry>
+	<entry key="tattoo.location.hamLeft">Left Hamstring</entry>
+	<entry key="tattoo.location.calfRight">Right Calf</entry>
+	<entry key="tattoo.location.calfLeft">Left Calf</entry>
 </properties>

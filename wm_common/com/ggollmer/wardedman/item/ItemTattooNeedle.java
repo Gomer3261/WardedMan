@@ -15,6 +15,7 @@ public class ItemTattooNeedle extends ItemWardedMan
 		super(id);
 		setUnlocalizedName(ItemNames.TATTOO_NEEDLE_NAME);
 		setCreativeTab(WardedMan.tabsWardedMan);
+		maxStackSize = 16;
 	}
 	
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer thePlayer)

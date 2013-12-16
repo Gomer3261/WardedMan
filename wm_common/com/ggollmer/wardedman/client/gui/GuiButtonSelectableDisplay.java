@@ -28,9 +28,9 @@ public class GuiButtonSelectableDisplay extends GuiButtonSelectable
 	}
 	
 	@Override
-	public void drawButton(Minecraft par1Minecraft, int par2, int par3)
+	public void drawBackground(Minecraft par1Minecraft, int par2, int par3)
     {
-		super.drawButton(par1Minecraft, par2, par3);
+		super.drawBackground(par1Minecraft, par2, par3);
 		if(internalTexture != null) {
 			par1Minecraft.getTextureManager().bindTexture(internalTexture);
 			this.drawInternalTexturedModalRect(this.xPosition, this.yPosition, this.width, this.height);

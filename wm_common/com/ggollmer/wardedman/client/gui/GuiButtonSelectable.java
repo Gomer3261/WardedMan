@@ -23,14 +23,16 @@ public class GuiButtonSelectable extends GuiButtonModal
 	}
 	
 	@Override
-	public void drawButton(Minecraft par1Minecraft, int par2, int par3)
+	public void drawBackground(Minecraft par1Minecraft, int par2, int par3)
     {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		if(selected) {
-			par1Minecraft.getTextureManager().bindTexture(buttonTexture);
-            this.drawTexturedModalRect(this.xPosition, this.yPosition, this.xSelectedPosition, this.ySelectedPosition, this.width, this.height);
-		} else {
-			super.drawButton(par1Minecraft, par2, par3);
+		if(enabled) {
+			if(selected) {
+				par1Minecraft.getTextureManager().bindTexture(buttonTexture);
+	            this.drawTexturedModalRect(this.xPosition, this.yPosition, this.xSelectedPosition, this.ySelectedPosition, this.width, this.height);
+			} else {
+				super.drawBackground(par1Minecraft, par2, par3);
+			}
 		}
     }
 	

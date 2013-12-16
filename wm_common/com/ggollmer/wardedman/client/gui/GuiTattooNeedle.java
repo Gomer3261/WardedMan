@@ -84,10 +84,17 @@ public class GuiTattooNeedle extends GuiScreen
         						NEEDLE_GUI_LOCATION));
         	TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(player.username);
         	locationButtons.get(i).darkenOnDisable = false;
+        	List<String> tooltip = new ArrayList<String>();
         	if(stats.getTattooId(i) != -1) {
         		locationButtons.get(i).setInternalRect(TattooHandler.tattoos[stats.getTattooId(i)].tattooImage, stats.getTattooColour(i));
+        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.IDToName.get(i)) + " Tattoo");
+        		tooltip.add(TattooHandler.tattoos[stats.getTattooId(i)].getLocalizedName());
+        		tooltip.add(TattooHandler.tattoos[stats.getTattooId(i)].getLocalizedDescription());
         		locationButtons.get(i).enabled = false;
+        	} else {
+        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.IDToName.get(i)));
         	}
+        	locationButtons.get(i).setTooltip(tooltip);
         	buttonList.add(locationButtons.get(i));
         }
         
@@ -100,6 +107,9 @@ public class GuiTattooNeedle extends GuiScreen
         						190, 36, 204, 36, 176, 36, 14, 14, 
         						NEEDLE_GUI_LOCATION)
         						.setInternalTexture(new ResourceLocation("textures/items/dye_powder" + "_" + ItemDye.dyeItemNames[j + i*COLOUR_COLS] + ".png")));
+        		List<String> tooltip = new ArrayList<String>();
+        		tooltip.add(Item.dyePowder.getItemDisplayName(new ItemStack(Item.dyePowder, 1, j + i*COLOUR_COLS)));
+        		colourButtons.get(j + i*COLOUR_COLS).setTooltip(tooltip);
         		buttonList.add(colourButtons.get(j + i*COLOUR_COLS));
         	}
         }
@@ -143,7 +153,20 @@ public class GuiTattooNeedle extends GuiScreen
         this.drawTexturedModalRect(xOffset, yOffset, 0, 0, this.xSize, this.ySize);
         
         super.drawScreen(par1, par2, par3);
+        drawToolTip(par1, par2, par3);
     }
+	
+	public void drawToolTip(int par1, int par2, float par3) {
+		for (GuiButtonModal guibutton : locationButtons) {
+			guibutton.drawTooltip(par1, par2);
+        }
+		for (GuiButtonModal guibutton : imageButtons) {
+			guibutton.drawTooltip(par1, par2);
+        }
+		for (GuiButtonModal guibutton : colourButtons) {
+			guibutton.drawTooltip(par1, par2);
+        }
+	}
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
@@ -216,11 +239,17 @@ public class GuiTattooNeedle extends GuiScreen
 					imageButtons.get(i).setInternalTexture(TattooHandler.tattoos[validTattoos.get(i)].tattooImage);
 				}
 				
+				List<String> tooltip = new ArrayList<String>();
+				tooltip.add(TattooHandler.tattoos[validTattoos.get(i)].getLocalizedName());
+				tooltip.add(TattooHandler.tattoos[validTattoos.get(i)].getLocalizedDescription());
+				
+				imageButtons.get(i).setTooltip(tooltip);
 				imageButtons.get(i).enabled = true;
 				imageButtons.get(i).setSelectionId(validTattoos.get(i));
 			}
 			else {
 				imageButtons.get(i).setInternalTexture(null);
+				imageButtons.get(i).setTooltip(null);
 				imageButtons.get(i).enabled = false;
 				imageButtons.get(i).setSelectionId(-1);
 			}

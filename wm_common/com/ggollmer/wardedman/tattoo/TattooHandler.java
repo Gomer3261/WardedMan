@@ -59,8 +59,8 @@ public class TattooHandler
 		IDToName.put(TattooConstants.RIGHT_SHOULDER_LOCATION_ID, TattooConstants.RIGHT_SHOULDER_LOCATION_NAME);
 		NameToID.put(TattooConstants.LEFT_SHOULDER_LOCATION_NAME, TattooConstants.LEFT_SHOULDER_LOCATION_ID);
 		IDToName.put(TattooConstants.LEFT_SHOULDER_LOCATION_ID, TattooConstants.LEFT_SHOULDER_LOCATION_NAME);
-		NameToID.put(TattooConstants.BACK_LOCATION_NAME, TattooConstants.HEAD_LOCATION_ID);
-		IDToName.put(TattooConstants.BACK_LOCATION_ID, TattooConstants.HEAD_LOCATION_NAME);
+		NameToID.put(TattooConstants.BACK_LOCATION_NAME, TattooConstants.BACK_LOCATION_ID);
+		IDToName.put(TattooConstants.BACK_LOCATION_ID, TattooConstants.BACK_LOCATION_NAME);
 		NameToID.put(TattooConstants.RIGHT_GLUTEAL_LOCATION_NAME, TattooConstants.RIGHT_GLUTEAL_LOCATION_ID);
 		IDToName.put(TattooConstants.RIGHT_GLUTEAL_LOCATION_ID, TattooConstants.RIGHT_GLUTEAL_LOCATION_NAME);
 		NameToID.put(TattooConstants.LEFT_GLUTEAL_LOCATION_NAME, TattooConstants.LEFT_GLUTEAL_LOCATION_ID);

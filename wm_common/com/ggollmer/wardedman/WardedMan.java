@@ -11,6 +11,7 @@ import com.ggollmer.wardedman.core.handler.LocalizationHandler;
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
 import com.ggollmer.wardedman.item.WardedManItems;
+import com.ggollmer.wardedman.item.crafting.WardedManRecipes;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.PacketHandler;
 import com.ggollmer.wardedman.player.DropMonitor;
@@ -86,6 +87,7 @@ public class WardedMan
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
 		
 		WardedManItems.init();
+		WardedManRecipes.init();
 		
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		

@@ -2,7 +2,9 @@ package com.ggollmer.wardedman.player;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
+import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.network.packet.PacketTattooUpdate;
@@ -54,6 +56,20 @@ public class TattooTracker implements IPlayerTracker
 	@Override
 	public void onPlayerRespawn(EntityPlayer player)
 	{
+		LogHelper.debugLog("Player has respawned!");
+		if(TattooConstants.TATTOO_LOSS_ON_DEATH) { // Should be enabled on hardcore mode?!
+			NBTTagCompound playerTags = player.getEntityData();
+			if (!playerTags.hasKey(PlayerNBTNames.WARDED_MAN_NBT_NAME))
+	        {
+	            playerTags.setCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME, new NBTTagCompound());
+	        }
+			TattooStats stats = new TattooStats();
+	        stats.username = player.username;
+	        
+	        PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(stats.assemblePacket()));
+	        
+	        tattooStatsMap.put(player.username, stats);
+		}
 	}
 	
 	public void handleTattooDataPacket(PacketTattooData packet) {

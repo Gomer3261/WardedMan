@@ -6,9 +6,16 @@ public class TattooConstants
 	public static final int LOCATION_COUNT = 22;
 	public static final int COLOUR_COUNT = 16;
 	
-	public static final int NO_TATOO_ID = -1;
+	public static final String CONFIGURATION_CATEGORY = "Tattoo";
+	
+	public static final String TATTOO_LOSS_ON_DEATH_NAME = "Tattoo Loss On Death";
+	public static final boolean TATTOO_LOSS_ON_DEATH_DEFAULT = false;
+	public static boolean TATTOO_LOSS_ON_DEATH;
+	
 	
 	/* Tattoos */
+	public static final int NO_TATOO_ID = -1;
+	
 	public static final int DAMAGE_REDUCTION_ID = 0;
 	public static final String DAMAGE_REDUCTION_NAME = "damageReduction";
 	

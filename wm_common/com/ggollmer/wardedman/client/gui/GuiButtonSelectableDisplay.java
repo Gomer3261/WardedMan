@@ -1,5 +1,7 @@
 package com.ggollmer.wardedman.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
@@ -32,6 +34,7 @@ public class GuiButtonSelectableDisplay extends GuiButtonSelectable
     {
 		super.drawBackground(par1Minecraft, par2, par3);
 		if(internalTexture != null) {
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			par1Minecraft.getTextureManager().bindTexture(internalTexture);
 			this.drawInternalTexturedModalRect(this.xPosition, this.yPosition, this.width, this.height);
 		}

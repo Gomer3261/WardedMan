@@ -30,16 +30,29 @@ public class TattooStats
 		this.loadFromPacket(packet);
 	}
 
-	public boolean updateTattoo(int tattooLocation, int tattooId, int tattooColour) {
-		
+	public boolean setTattoo(int tattooLocation, int tattooId, int tattooColour) {
 		if(tattooValues[tattooLocation] != -1) return false;
-		if(TattooHandler.tattoos[tattooId] == null) return false;
+		if(tattooId != -1 && TattooHandler.tattoos[tattooId] == null) return false;
 		
-		tattooCounts[tattooId] ++;
+		if(tattooId >= 0) {
+			tattooCounts[tattooId] ++;
+		}
 		tattooValues[tattooLocation] = tattooId;
 		tattooColours[tattooLocation] = tattooColour;
 		
 		WardedMan.tattooTracker.sendTattooUpdate(this.username, tattooLocation, tattooId, tattooColour);
+		
+		return true;
+	}
+	
+	public boolean removeTattoo(int tattooLocation) {
+		if(tattooValues[tattooLocation] == -1) return false;
+		
+		tattooCounts[tattooValues[tattooLocation]] --;
+		tattooValues[tattooLocation] = -1;
+		tattooColours[tattooLocation] = 0;
+		
+		WardedMan.tattooTracker.sendTattooUpdate(username, tattooLocation, -1, 0);
 		
 		return true;
 	}

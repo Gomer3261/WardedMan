@@ -1,5 +1,7 @@
 package com.ggollmer.wardedman.client.gui;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,13 +25,12 @@ public class GuiButtonSelectable extends GuiButtonModal
 	@Override
 	public void drawBackground(Minecraft par1Minecraft, int par2, int par3)
     {
-		if(enabled) {
-			if(selected) {
-				par1Minecraft.getTextureManager().bindTexture(buttonTexture);
-	            this.drawTexturedModalRect(this.xPosition, this.yPosition, this.xSelectedPosition, this.ySelectedPosition, this.width, this.height);
-			} else {
-				super.drawBackground(par1Minecraft, par2, par3);
-			}
+		if(selected) {
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			par1Minecraft.getTextureManager().bindTexture(buttonTexture);
+            this.drawTexturedModalRect(this.xPosition, this.yPosition, this.xSelectedPosition, this.ySelectedPosition, this.width, this.height);
+		} else {
+			super.drawBackground(par1Minecraft, par2, par3);
 		}
     }
 	

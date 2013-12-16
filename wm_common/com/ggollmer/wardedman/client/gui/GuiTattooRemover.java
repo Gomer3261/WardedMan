@@ -11,7 +11,7 @@ import com.ggollmer.wardedman.lib.GuiConstants;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
-import com.ggollmer.wardedman.network.packet.PacketTattooRequest;
+import com.ggollmer.wardedman.network.packet.PacketTattooRemove;
 import com.ggollmer.wardedman.player.TattooStats;
 import com.ggollmer.wardedman.tattoo.TattooHandler;
 
@@ -28,8 +28,8 @@ public class GuiTattooRemover extends GuiScreen
 {
 	protected static final ResourceLocation REMOVER_GUI_LOCATION = new ResourceLocation(Reference.MOD_ID, GuiConstants.TATTOO_REMOVER_GUI_LOCATION);
 	
-	protected static final int[] X_TATTOO_COORDS = new int[]{40, 30, 50, 40, 9, 31, 50, 70, 32, 50, 122, 108, 137, 122, 122, 133, 91, 152, 114, 132, 114, 132};
-	protected static final int[] Y_TATTOO_COORDS = new int[]{8, 30, 30, 55, 71, 77, 77, 71, 123, 123, 8, 31, 31, 48, 66, 66, 71, 71, 84, 84, 111, 111};
+	protected static final int[] X_TATTOO_COORDS = new int[]{40, 30, 50, 40,  9, 31, 50, 70,  32,  50, 122, 108, 137, 122, 112, 133, 91, 152, 114, 132, 114, 132};
+	protected static final int[] Y_TATTOO_COORDS = new int[]{8,  30, 30, 55, 71, 77, 77, 71, 123, 123,   8,  31,  31,  48,  66,  66, 71,  71,  84,  84, 111, 111};
 	
 	protected EntityPlayer player;
 	
@@ -122,7 +122,7 @@ public class GuiTattooRemover extends GuiScreen
 			closeGui();
 		}
 		else if(button == submitButton) {
-			submitRemovalRequest(locationButtons.get(activeLocation).getSelectionId(), -1, 0);
+			submitRemovalRequest(locationButtons.get(activeLocation).getSelectionId());
 			closeGui();
 		}
 		
@@ -155,7 +155,7 @@ public class GuiTattooRemover extends GuiScreen
         this.mc.setIngameFocus();
 	}
 	
-	private void submitRemovalRequest(int tattooLocation, int tattooId, int tattooColour) {
-		PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketTattooRequest(this.player.username, tattooLocation, tattooId, tattooColour)));
+	private void submitRemovalRequest(int tattooLocation) {
+		PacketDispatcher.sendPacketToServer(PacketTypeHandler.populatePacket(new PacketTattooRemove(this.player.username, tattooLocation)));
 	}
 }

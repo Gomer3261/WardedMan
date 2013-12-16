@@ -71,6 +71,8 @@ public class GuiButtonModal extends GuiButton
 	        FontRenderer fontrenderer = mc.fontRenderer;
 	        mc.getTextureManager().bindTexture(buttonTexture);
 	        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	        GL11.glEnable(GL11.GL_BLEND);
+	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	        
 	        this.field_82253_i = mx >= this.xPosition && my >= this.yPosition && mx < this.xPosition + this.width && my < this.yPosition + this.height;
 	        int hoverState = this.getHoverState(this.field_82253_i);
@@ -117,7 +119,7 @@ public class GuiButtonModal extends GuiButton
     {
         if (!lines.isEmpty())
         {
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        	GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             RenderHelper.disableStandardItemLighting();
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_DEPTH_TEST);

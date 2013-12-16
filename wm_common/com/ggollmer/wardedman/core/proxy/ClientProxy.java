@@ -34,7 +34,7 @@ public class ClientProxy extends CommonProxy
 		if(Minecraft.getMinecraft().thePlayer.worldObj.isRemote) {
 			TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
 			if(stats != null) {
-				stats.updateTattoo(location, id, colour);
+				stats.setTattoo(location, id, colour);
 			}
 		}
 	}

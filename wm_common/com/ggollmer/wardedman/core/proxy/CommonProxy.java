@@ -1,7 +1,6 @@
 package com.ggollmer.wardedman.core.proxy;
 
 import com.ggollmer.wardedman.WardedMan;
-import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.item.WardedManItems;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.player.TattooStats;
@@ -30,38 +29,38 @@ public class CommonProxy
 		/* Why would care about skins? */
 	}
 	
-	/* Packet handling helpers! */
+	/* Packet handling helpers */
 
 	public void handleTattooUpdatePacket(String username, int location, int id, int colour) {
 	}
 	
 	public void handleTattooDataPacket(PacketTattooData packet) {}
 
-	public void handleTattooRequestPack(String username, int location, int id,
+	public void handleTattooRequestPacket(String username, int location, int id,
 			int colour)
 	{
 		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
 		if(stats != null) {
 			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
 			if(player != null) {
-				boolean canTattooThemselves = false;
-				if(player.inventory.getStackInSlot(player.inventory.currentItem).getItem() == WardedManItems.tattooNeedle) {
-					for(int i=0; i<player.inventory.mainInventory.length; i++) {
-						if(player.inventory.mainInventory[i] != null) {
-							if(player.inventory.mainInventory[i].getItem() == Item.dyePowder) {
-								if(player.inventory.mainInventory[i].getItemDamage() == colour) {
-									LogHelper.debugLog("Found the dye that the player used!");
-									canTattooThemselves = true;
-									player.inventory.decrStackSize(i, 1);
-									break;
+				if(!player.worldObj.isRemote) {
+					boolean canTattooThemselves = false;
+					if(player.inventory.getStackInSlot(player.inventory.currentItem).getItem() == WardedManItems.tattooNeedle) {
+						for(int i=0; i<player.inventory.mainInventory.length; i++) {
+							if(player.inventory.mainInventory[i] != null) {
+								if(player.inventory.mainInventory[i].getItem() == Item.dyePowder) {
+									if(player.inventory.mainInventory[i].getItemDamage() == colour) {
+										canTattooThemselves = true;
+										player.inventory.decrStackSize(i, 1);
+										break;
+									}
 								}
 							}
 						}
-					}
-					if(canTattooThemselves) {
-						LogHelper.debugLog("Tattooing time!");
-						player.inventory.decrStackSize(player.inventory.currentItem, 1);
-						stats.updateTattoo(location, id, ItemDye.dyeColors[colour]);
+						if(canTattooThemselves) {
+							player.inventory.decrStackSize(player.inventory.currentItem, 1);
+							stats.setTattoo(location, id, ItemDye.dyeColors[colour]);
+						}
 					}
 				}
 			}
@@ -69,4 +68,20 @@ public class CommonProxy
 	}
 
 	public void handleDyePickupPacket(String username, int damage) {}
+
+	public void handleTattooRemovePacket(String username, int location)
+	{
+		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
+		if(stats != null) {
+			EntityPlayer player = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username);
+			if(player != null) {
+				if(!player.worldObj.isRemote) {
+					if(player.inventory.getStackInSlot(player.inventory.currentItem).getItem() == WardedManItems.tattooRemover) {
+						player.inventory.decrStackSize(player.inventory.currentItem, 1);
+						stats.removeTattoo(location);
+					}
+				}
+			}
+		}
+	}
 }

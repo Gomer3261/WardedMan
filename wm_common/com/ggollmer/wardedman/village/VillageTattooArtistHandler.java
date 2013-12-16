@@ -16,7 +16,7 @@ public class VillageTattooArtistHandler implements IVillageCreationHandler
 	public StructureVillagePieceWeight getVillagePieceWeight(Random random,
 			int i)
 	{
-		return new StructureVillagePieceWeight(ComponentTattooArtistHouse.class, 100, i + random.nextInt(4));
+		return new StructureVillagePieceWeight(ComponentTattooArtistHouse.class, 60, i + random.nextInt(4));
 	}
 
 	@Override

@@ -18,6 +18,9 @@ public class WardedManItems
 		tattooNeedle = new ItemTattooNeedle(ItemIds.TATTOO_NEEDLE);
 		
 		GameRegistry.registerItem(tattooNeedle, ItemNames.TATTOO_NEEDLE_NAME);
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(tattooNeedle.itemID, 1, 1, 3, 2));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(tattooNeedle.itemID, 0, 1, 3, 2));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(tattooNeedle.itemID, 0, 1, 3, 2));
+		ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(tattooNeedle.itemID, 0, 1, 3, 2));
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(tattooNeedle.itemID, 0, 1, 3, 2));
 	}
 }

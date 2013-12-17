@@ -1,5 +1,6 @@
 package com.ggollmer.wardedman.item.crafting;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
@@ -16,5 +17,6 @@ public class WardedManRecipes
 		}
 		
 		GameRegistry.addRecipe(new ItemStack(WardedManItems.tattooRemover), new Object[] {"  x", " y ", "z  ", 'x', Item.diamond, 'y', WardedManItems.tattooNeedle, 'z', WardedManItems.enderDye});
+		GameRegistry.addRecipe(new ItemStack(WardedManItems.tattooViewer), new Object[] {"xyx", "yzy", " x ", 'x', Item.ingotGold, 'y', Block.thinGlass, 'z', WardedManItems.enderDye});
 	}
 }

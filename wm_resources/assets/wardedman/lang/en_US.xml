@@ -7,6 +7,7 @@
 	<entry key="item.tattooNeedle.name">Tattoo Needle</entry>
 	<entry key="item.enderDye.name">Ender Dye</entry>
 	<entry key="item.tattooRemover.name">Tattoo Remover</entry>
+	<entry key="item.tattooViewer.name">Tattoo Mirror</entry>
 	<entry key="itemGroup.wardedman">WardedMan</entry>
 	<entry key="gui.tattooNeedle.submit">Tattoo</entry>
 	<entry key="gui.tattooNeedle.cancel">Cancel</entry>

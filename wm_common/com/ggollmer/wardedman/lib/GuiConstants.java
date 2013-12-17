@@ -11,4 +11,7 @@ public class GuiConstants
 	public static final String TATTOO_REMOVER_GUI_LOCATION = "textures/gui/tattooRemoverGui.png";
 	public static final String TATTOO_REMOVER_SUBMIT = "gui.tattooRemover.submit";
 	public static final String TATTOO_REMOVER_CANCEL = "gui.tattooRemover.cancel";
+	
+	public static final int TATTOO_VIEWER_GUI_ID = 2;
+	public static final String TATTOO_VIEWER_GUI_LOCATION = "textures/gui/tattooViewerGui.png";
 }

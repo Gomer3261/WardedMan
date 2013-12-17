@@ -6,16 +6,18 @@ import java.util.ArrayList;
 
 import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.lib.TattooConstants;
+import com.ggollmer.wardedman.player.TattooStats;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 
 public class TattooHandler
 {
-	public static HashMap<String, Integer> NameToID = new HashMap<String, Integer>();
+	public static HashMap<Integer, Integer> IDToSlot = new HashMap<Integer, Integer>();
 	public static HashMap<Integer, String> IDToName = new HashMap<Integer, String>();
 	public static Tattoo[] tattoos = new Tattoo[TattooConstants.ID_COUNT];
 	public static List<List<Integer>> validTattoos = new ArrayList<List<Integer>>(TattooConstants.LOCATION_COUNT);
+	public static List<List<Integer>> validLocations = new ArrayList<List<Integer>>(TattooConstants.ID_COUNT);
 	
 	public static Tattoo tattooDamageReduction;
 	public static Tattoo tattooFireResistance;
@@ -32,50 +34,74 @@ public class TattooHandler
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
 			validTattoos.add(i, new ArrayList<Integer>());
 		}
+		for(int i=0; i<TattooConstants.ID_COUNT; i++) {
+			validLocations.add(i, new ArrayList<Integer>());
+		}
 		
-		NameToID.put(TattooConstants.FACE_LOCATION_NAME, TattooConstants.FACE_LOCATION_ID);
+		IDToSlot.put(TattooConstants.FACE_LOCATION_ID, TattooConstants.FACE_LOCATION_SLOT);
 		IDToName.put(TattooConstants.FACE_LOCATION_ID, TattooConstants.FACE_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_CHEST_LOCATION_NAME, TattooConstants.RIGHT_CHEST_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_CHEST_LOCATION_ID, TattooConstants.RIGHT_CHEST_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_CHEST_LOCATION_ID, TattooConstants.RIGHT_CHEST_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_CHEST_LOCATION_NAME, TattooConstants.LEFT_CHEST_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_CHEST_LOCATION_ID, TattooConstants.LEFT_CHEST_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_CHEST_LOCATION_ID, TattooConstants.LEFT_CHEST_LOCATION_NAME);
-		NameToID.put(TattooConstants.AB_LOCATION_NAME, TattooConstants.AB_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.AB_LOCATION_ID, TattooConstants.AB_LOCATION_SLOT);
 		IDToName.put(TattooConstants.AB_LOCATION_ID, TattooConstants.AB_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_PALM_LOCATION_NAME, TattooConstants.RIGHT_PALM_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_PALM_LOCATION_ID, TattooConstants.RIGHT_PALM_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_PALM_LOCATION_ID, TattooConstants.RIGHT_PALM_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_PALM_LOCATION_NAME, TattooConstants.LEFT_PALM_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_PALM_LOCATION_ID, TattooConstants.LEFT_PALM_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_PALM_LOCATION_ID, TattooConstants.LEFT_PALM_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_THIGH_LOCATION_NAME, TattooConstants.RIGHT_THIGH_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_THIGH_LOCATION_ID, TattooConstants.RIGHT_THIGH_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_THIGH_LOCATION_ID, TattooConstants.RIGHT_THIGH_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_THIGH_LOCATION_NAME, TattooConstants.LEFT_THIGH_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_THIGH_LOCATION_ID, TattooConstants.LEFT_THIGH_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_THIGH_LOCATION_ID, TattooConstants.LEFT_THIGH_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_FOOT_LOCATION_NAME, TattooConstants.RIGHT_FOOT_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_FOOT_LOCATION_ID, TattooConstants.RIGHT_FOOT_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_FOOT_LOCATION_ID, TattooConstants.RIGHT_FOOT_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_FOOT_LOCATION_NAME, TattooConstants.LEFT_FOOT_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_FOOT_LOCATION_ID, TattooConstants.LEFT_FOOT_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_FOOT_LOCATION_ID, TattooConstants.LEFT_FOOT_LOCATION_NAME);
-		NameToID.put(TattooConstants.HEAD_LOCATION_NAME, TattooConstants.HEAD_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.HEAD_LOCATION_ID, TattooConstants.HEAD_LOCATION_SLOT);
 		IDToName.put(TattooConstants.HEAD_LOCATION_ID, TattooConstants.HEAD_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_SHOULDER_LOCATION_NAME, TattooConstants.RIGHT_SHOULDER_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_SHOULDER_LOCATION_ID, TattooConstants.RIGHT_SHOULDER_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_SHOULDER_LOCATION_ID, TattooConstants.RIGHT_SHOULDER_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_SHOULDER_LOCATION_NAME, TattooConstants.LEFT_SHOULDER_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_SHOULDER_LOCATION_ID, TattooConstants.LEFT_SHOULDER_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_SHOULDER_LOCATION_ID, TattooConstants.LEFT_SHOULDER_LOCATION_NAME);
-		NameToID.put(TattooConstants.BACK_LOCATION_NAME, TattooConstants.BACK_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.BACK_LOCATION_ID, TattooConstants.BACK_LOCATION_SLOT);
 		IDToName.put(TattooConstants.BACK_LOCATION_ID, TattooConstants.BACK_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_GLUTEAL_LOCATION_NAME, TattooConstants.RIGHT_GLUTEAL_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_GLUTEAL_LOCATION_ID, TattooConstants.RIGHT_GLUTEAL_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_GLUTEAL_LOCATION_ID, TattooConstants.RIGHT_GLUTEAL_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_GLUTEAL_LOCATION_NAME, TattooConstants.LEFT_GLUTEAL_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_GLUTEAL_LOCATION_ID, TattooConstants.LEFT_GLUTEAL_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_GLUTEAL_LOCATION_ID, TattooConstants.LEFT_GLUTEAL_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_HAND_LOCATION_NAME, TattooConstants.RIGHT_HAND_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_HAND_LOCATION_ID, TattooConstants.RIGHT_HAND_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_HAND_LOCATION_ID, TattooConstants.RIGHT_HAND_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_HAND_LOCATION_NAME, TattooConstants.LEFT_HAND_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_HAND_LOCATION_ID, TattooConstants.LEFT_HAND_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_HAND_LOCATION_ID, TattooConstants.LEFT_HAND_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_HAM_LOCATION_NAME, TattooConstants.RIGHT_HAM_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_HAM_LOCATION_ID, TattooConstants.RIGHT_HAM_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_HAM_LOCATION_ID, TattooConstants.RIGHT_HAM_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_HAM_LOCATION_NAME, TattooConstants.LEFT_HAM_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_HAM_LOCATION_ID, TattooConstants.LEFT_HAM_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_HAM_LOCATION_ID, TattooConstants.LEFT_HAM_LOCATION_NAME);
-		NameToID.put(TattooConstants.RIGHT_CALF_LOCATION_NAME, TattooConstants.RIGHT_CALF_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.RIGHT_CALF_LOCATION_ID, TattooConstants.RIGHT_CALF_LOCATION_SLOT);
 		IDToName.put(TattooConstants.RIGHT_CALF_LOCATION_ID, TattooConstants.RIGHT_CALF_LOCATION_NAME);
-		NameToID.put(TattooConstants.LEFT_CALF_LOCATION_NAME, TattooConstants.LEFT_CALF_LOCATION_ID);
+		
+		IDToSlot.put(TattooConstants.LEFT_CALF_LOCATION_ID, TattooConstants.LEFT_CALF_LOCATION_SLOT);
 		IDToName.put(TattooConstants.LEFT_CALF_LOCATION_ID, TattooConstants.LEFT_CALF_LOCATION_NAME);
 		
 		tattooDamageReduction = new TattooDamageReduction(TattooConstants.DAMAGE_REDUCTION_ID, TattooConstants.DAMAGE_REDUCTION_NAME);
@@ -106,13 +132,23 @@ public class TattooHandler
 	}
 	
 	public static void validateTattooForLocation(int location, int tattooId) {
-		if(!validTattoos.get(location).contains(tattooId)) {
-			validTattoos.get(location).add(tattooId);
-		}
+		validTattoos.get(location).add(tattooId);
+		validLocations.get(tattooId).add(location);
 	}
 	
 	public static int getPlayerTattooAmount(EntityPlayer player, int id)
 	{
-		return WardedMan.tattooTracker.getPlayerTattooStats(player.username).getTattooAmount(id);
+		int workingTattoos = 0;
+		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(player.username);
+		for(int location : validLocations.get(id)) {
+			if(stats.getTattooId(location) != id) continue;
+			if(IDToSlot.get(location) == -1) {
+				if(player.inventory.mainInventory[player.inventory.currentItem] != null) continue;
+			} else {
+				if(player.inventory.armorInventory[IDToSlot.get(location)] != null) continue;
+			}
+			workingTattoos++;
+		}
+		return workingTattoos;
 	}
 }

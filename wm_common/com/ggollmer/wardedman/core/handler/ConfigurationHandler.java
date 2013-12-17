@@ -25,6 +25,7 @@ public class ConfigurationHandler
 			/* Item Configuration */
 			ItemIds.TATTOO_NEEDLE = configuration.getItem(ItemNames.TATTOO_NEEDLE_NAME, ItemIds.TATTOO_NEEDLE_DEFAULT).getInt(ItemIds.TATTOO_NEEDLE_DEFAULT);
 			ItemIds.TATTOO_REMOVER = configuration.getItem(ItemNames.TATTOO_REMOVER_NAME, ItemIds.TATTOO_REMOVER_DEFAULT).getInt(ItemIds.TATTOO_REMOVER_DEFAULT);
+			ItemIds.TATTOO_VIEWER = configuration.getItem(ItemNames.TATTOO_VIEWER_NAME, ItemIds.TATTOO_VIEWER_DEFAULT).getInt(ItemIds.TATTOO_VIEWER_DEFAULT);
 			ItemIds.ENDER_DYE = configuration.getItem(ItemNames.ENDER_DYE_NAME, ItemIds.ENDER_DYE_DEFAULT).getInt(ItemIds.ENDER_DYE_DEFAULT);
 			
 			/* Tattoo Configuration */

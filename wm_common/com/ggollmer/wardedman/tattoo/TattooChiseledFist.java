@@ -23,19 +23,16 @@ public class TattooChiseledFist extends Tattoo
 	
 	@ForgeSubscribe
 	public void onEntityHurt(HarvestCheck event) {
-		if(event.entityPlayer.inventory.mainInventory[event.entityPlayer.inventory.currentItem] == null)
-		{
-			int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
-			if(tattooCount > 0) {
-				if(event.block.blockMaterial.isToolNotRequired()) {
-					event.success = true;
-					return;
-				}
-				
-				int harvestLevel = MinecraftForge.getBlockHarvestLevel(event.block, 0, "pickaxe");
-				if(harvestLevel < tattooCount && harvestLevel != -1) {
-					event.success = true;
-				}
+		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
+		if(tattooCount > 0) {
+			if(event.block.blockMaterial.isToolNotRequired()) {
+				event.success = true;
+				return;
+			}
+			
+			int harvestLevel = MinecraftForge.getBlockHarvestLevel(event.block, 0, "pickaxe");
+			if(harvestLevel < tattooCount && harvestLevel != -1) {
+				event.success = true;
 			}
 		}
 	}

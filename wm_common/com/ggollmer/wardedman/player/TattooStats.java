@@ -123,7 +123,7 @@ public class TattooStats
 			}
 		}
 		
-		clearTattooData();
+		//clearTattooData();
 	}
 	
 	public void clearTattooData() {

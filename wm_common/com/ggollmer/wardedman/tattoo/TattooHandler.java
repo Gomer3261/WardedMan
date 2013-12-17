@@ -29,6 +29,8 @@ public class TattooHandler
 	public static Tattoo tattooThorns;
 	public static Tattoo tattooMagicResist;
 	public static Tattoo tattooProjectileProtection;
+	public static Tattoo tattooJumpBoost;
+	public static Tattoo tattooExplosionResistance;
 	
 	public static void init() {
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
@@ -114,6 +116,8 @@ public class TattooHandler
 		tattooThorns = new TattooThorns(TattooConstants.THORNS_ID, TattooConstants.THORNS_NAME);
 		tattooMagicResist = new TattooMagicResist(TattooConstants.MAGIC_RESIST_ID, TattooConstants.MAGIC_RESIST_NAME);
 		tattooProjectileProtection = new TattooProjectileProtection(TattooConstants.PROJECTILE_PROTECTION_ID, TattooConstants.PROJECTILE_PROTECTION_NAME);
+		tattooJumpBoost = new TattooJumpBoost(TattooConstants.JUMP_BOOST_ID, TattooConstants.JUMP_BOOST_NAME);
+		tattooExplosionResistance = new TattooExplosionResistance(TattooConstants.EXPLOSION_RESISTANCE_ID, TattooConstants.EXPLOSION_RESISTANCE_NAME);
 		
 		MinecraftForge.EVENT_BUS.register(tattooDamageReduction);
 		MinecraftForge.EVENT_BUS.register(tattooFireResistance);
@@ -125,6 +129,8 @@ public class TattooHandler
 		MinecraftForge.EVENT_BUS.register(tattooThorns);
 		MinecraftForge.EVENT_BUS.register(tattooMagicResist);
 		MinecraftForge.EVENT_BUS.register(tattooProjectileProtection);
+		MinecraftForge.EVENT_BUS.register(tattooJumpBoost);
+		MinecraftForge.EVENT_BUS.register(tattooExplosionResistance);
 	}
 	
 	public static List<Integer> getValidTattoosForLocation(int location) {

@@ -46,6 +46,12 @@ public class TattooConstants
 	public static final int PROJECTILE_PROTECTION_ID = 9;
 	public static final String PROJECTILE_PROTECTION_NAME = "projectileProtection";
 	
+	public static final int JUMP_BOOST_ID = 10;
+	public static final String JUMP_BOOST_NAME = "jumpBoost";
+	
+	public static final int EXPLOSION_RESISTANCE_ID = 11;
+	public static final String EXPLOSION_RESISTANCE_NAME = "explosionResistance";
+	
 	/* Tattoo Locations */
 	public static final int ARMOR_SLOT_HAND = -1;
 	public static final int ARMOR_SLOT_HELM = 3;

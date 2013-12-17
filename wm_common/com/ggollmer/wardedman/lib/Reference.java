@@ -2,7 +2,7 @@ package com.ggollmer.wardedman.lib;
 
 public class Reference
 {
-	public static final boolean DEBUG_MODE = true;
+	public static final boolean DEBUG_MODE = false;
 	
 	public static final String MOD_ID = "wardedman";
 	public static final String MOD_NAME = "WaredMan";

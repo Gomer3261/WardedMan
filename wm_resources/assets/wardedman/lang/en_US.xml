@@ -33,6 +33,10 @@
 	<entry key="tattoo.magicResist.desc">Reduce incoming magic damage by 1/2</entry>
 	<entry key="tattoo.projectileProtection.name">Projectile Protection</entry>
 	<entry key="tattoo.projectileProtection.desc">Reduce damage from projectiles by 1/4</entry>
+	<entry key="tattoo.jumpBoost.name">Jump Boost</entry>
+	<entry key="tattoo.jumpBoost.desc">Jump 1/3 of a block higher</entry>
+	<entry key="tattoo.explosionResistance.name">Explosion Resistance</entry>
+	<entry key="tattoo.explosionResistance.desc">Reduce damage from explosions by 1/4</entry>
 	<entry key="tattoo.location.face">Forehead</entry>
 	<entry key="tattoo.location.chestRight">Right Pectoral</entry>
 	<entry key="tattoo.location.chestLeft">Left Pectoral</entry>

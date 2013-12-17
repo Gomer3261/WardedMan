@@ -159,13 +159,13 @@ public class GuiTattooNeedle extends GuiScreen
 	
 	public void drawToolTip(int par1, int par2, float par3) {
 		for (GuiButtonModal guibutton : locationButtons) {
-			guibutton.drawTooltip(par1, par2);
+			guibutton.drawTooltip(par1, par2, this.width, this.height);
         }
 		for (GuiButtonModal guibutton : imageButtons) {
-			guibutton.drawTooltip(par1, par2);
+			guibutton.drawTooltip(par1, par2, this.height, this.width);
         }
 		for (GuiButtonModal guibutton : colourButtons) {
-			guibutton.drawTooltip(par1, par2);
+			guibutton.drawTooltip(par1, par2, this.width, this.height);
         }
 	}
 	

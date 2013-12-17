@@ -13,13 +13,13 @@
 	<entry key="gui.tattooRemover.submit">Remove</entry>
 	<entry key="gui.tattooRemover.cancel">Cancel</entry>
 	<entry key="tattoo.damageReduction.name">Damage Resistance</entry>
-	<entry key="tattoo.damageReduction.desc">Reduce incoming damage by 1/12th</entry>
+	<entry key="tattoo.damageReduction.desc">Reduce damage taken by 1/12th</entry>
 	<entry key="tattoo.fireResistance.name">Fire Resistance</entry>
 	<entry key="tattoo.fireResistance.desc">Reduce fire damage by 1/10th</entry>
 	<entry key="tattoo.featherFalling.name">Feather Falling</entry>
 	<entry key="tattoo.featherFalling.desc">Reduce fall damage by 1/5th</entry>
 	<entry key="tattoo.ironFist.name">Iron Fist</entry>
-	<entry key="tattoo.ironFist.desc">Deal and additional 1/4 heart when punching</entry>
+	<entry key="tattoo.ironFist.desc">Deal an extra 0.5 damage punching</entry>
 	<entry key="tattoo.fireFist.name">Flaming Fist</entry>
 	<entry key="tattoo.fireFist.desc">Ignite target for 2 seconds</entry>
 	<entry key="tattoo.stoneFist.name">Stone Fist</entry>
@@ -27,7 +27,7 @@
 	<entry key="tattoo.chiseledFist.name">Chisel Fist</entry>
 	<entry key="tattoo.chiseledFist.desc">Break stronger blocks with your hands</entry>
 	<entry key="tattoo.thorns.name">Thorns</entry>
-	<entry key="tattoo.thorns.desc">Deal 1/2 incoming damage to attackers</entry>
+	<entry key="tattoo.thorns.desc">Deal 1/2 incoming damage back</entry>
 	<entry key="tattoo.magicResist.name">Magic Resistance</entry>
 	<entry key="tattoo.magicResist.desc">Reduce incoming magic damage by 1/2</entry>
 	<entry key="tattoo.projectileProtection.name">Projectile Protection</entry>

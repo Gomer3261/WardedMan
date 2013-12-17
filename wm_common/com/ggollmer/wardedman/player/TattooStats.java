@@ -4,7 +4,6 @@ import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
-import com.ggollmer.wardedman.tattoo.TattooHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,11 +30,12 @@ public class TattooStats
 	}
 
 	public boolean setTattoo(int tattooLocation, int tattooId, int tattooColour) {
-		if(tattooValues[tattooLocation] != -1) return false;
-		if(tattooId != -1 && TattooHandler.tattoos[tattooId] == null) return false;
-		
 		if(tattooId >= 0) {
 			tattooCounts[tattooId] ++;
+		} else {
+			if(tattooValues[tattooLocation] != -1) {
+				tattooCounts[tattooValues[tattooLocation]]--;
+			}
 		}
 		tattooValues[tattooLocation] = tattooId;
 		tattooColours[tattooLocation] = tattooColour;

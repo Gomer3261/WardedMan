@@ -102,20 +102,21 @@ public class GuiButtonModal extends GuiButton
 	        }
 	
 	        this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, l);
+	        //GL11.glDisable(GL11.GL_BLEND);
 	    }
 	}
 	
 	
 	
-	protected void drawTooltip(int mx, int my)
+	protected void drawTooltip(int mx, int my, int windowWidth, int windowHeight)
     {
         this.field_82253_i = mx >= this.xPosition && my >= this.yPosition && mx < this.xPosition + this.width && my < this.yPosition + this.height;
 		if(tooltip != null && this.field_82253_i) {
-        	drawHoveringText(tooltip, mx, my, fontRenderer);
+        	drawHoveringText(tooltip, mx, my, windowWidth, windowHeight, fontRenderer);
 		}
     }
 	
-	protected void drawHoveringText(List<String> lines, int mx, int my, FontRenderer font)
+	protected void drawHoveringText(List<String> lines, int mx, int my, int windowWidth, int windowHeight, FontRenderer font)
     {
         if (!lines.isEmpty())
         {
@@ -146,18 +147,17 @@ public class GuiButtonModal extends GuiButton
                 textHeight += 2 + (lines.size() - 1) * 10;
             }
 
-            /*if (xDrawPosition + maxLineWidth > this.width)
+            if (xDrawPosition + maxLineWidth > windowWidth)
             {
                 xDrawPosition -= 28 + maxLineWidth;
             }
 
-            if (yDrawPosition + textHeight + 6 > this.height)
+            if (yDrawPosition + textHeight + 6 > windowHeight)
             {
                 yDrawPosition = this.height - textHeight - 6;
-            }*/
+            }
             
             /* Render the border around the tooltip */
-            this.zLevel += 10.0F;
             int l1 = -267386864;
             this.drawGradientRect(xDrawPosition - 3, yDrawPosition - 4, xDrawPosition + maxLineWidth + 3, yDrawPosition - 3, l1, l1);
             this.drawGradientRect(xDrawPosition - 3, yDrawPosition + textHeight + 3, xDrawPosition + maxLineWidth + 3, yDrawPosition + textHeight + 4, l1, l1);
@@ -184,11 +184,10 @@ public class GuiButtonModal extends GuiButton
                 yDrawPosition += 10;
             }
 
-            this.zLevel -= 10.0F;
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            RenderHelper.enableStandardItemLighting();
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            //GL11.glEnable(GL11.GL_LIGHTING);
+            //GL11.glEnable(GL11.GL_DEPTH_TEST);
+            //RenderHelper.enableStandardItemLighting();
+            //GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         }
     }
 	

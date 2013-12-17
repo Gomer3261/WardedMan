@@ -112,7 +112,7 @@ public class GuiTattooRemover extends GuiScreen
 	
 	public void drawToolTip(int par1, int par2, float par3) {
 		for (GuiButtonModal guibutton : locationButtons) {
-			guibutton.drawTooltip(par1, par2);
+			guibutton.drawTooltip(par1, par2, this.width, this.height);
         }
 	}
 	

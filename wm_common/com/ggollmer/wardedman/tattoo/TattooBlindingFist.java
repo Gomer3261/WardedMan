@@ -2,13 +2,14 @@ package com.ggollmer.wardedman.tattoo;
 
 import com.ggollmer.wardedman.lib.TattooConstants;
 
-import net.minecraft.util.DamageSource;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-public class TattooIronFist extends Tattoo
+public class TattooBlindingFist extends Tattoo
 {
-	public TattooIronFist(String name) {
+	public TattooBlindingFist(String name) {
 		super(name);
 		
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_PALM_LOCATION_ID, id);
@@ -21,7 +22,9 @@ public class TattooIronFist extends Tattoo
 	public void onEntityHurt(AttackEntityEvent event) {
 		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
 		if(tattooCount > 0) {
-			event.target.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), 1 * tattooCount);
+			if(event.target instanceof EntityLiving) {
+				((EntityLiving) event.target).addPotionEffect(new PotionEffect(15, 20*tattooCount));
+			}
 		}
 	}
 }

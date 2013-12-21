@@ -37,6 +37,10 @@
 	<entry key="tattoo.jumpBoost.desc">Jump 1/3 of a block higher</entry>
 	<entry key="tattoo.explosionResistance.name">Explosion Resistance</entry>
 	<entry key="tattoo.explosionResistance.desc">Reduce damage from explosions by 1/4</entry>
+	<entry key="tattoo.nightVision.name">Night Vision</entry>
+	<entry key="tattoo.nightVision.desc">Allows you to see when others may not</entry>
+	<entry key="tattoo.blindingFist.name">Blinding Fist</entry>
+	<entry key="tattoo.blindingFist.desc">Blind your foe for a second</entry>
 	<entry key="tattoo.location.face">Forehead</entry>
 	<entry key="tattoo.location.chestRight">Right Pectoral</entry>
 	<entry key="tattoo.location.chestLeft">Left Pectoral</entry>

@@ -34,6 +34,7 @@ public class GuiTattooNeedle extends GuiScreen
 	protected static final int[] X_TATTOO_COORDS = new int[]{25, 19, 31, 25, 7, 19, 32, 44, 19, 32, 75, 67, 83, 75, 69, 81, 56, 93, 68, 82, 69, 82};
 	protected static final int[] Y_TATTOO_COORDS = new int[]{10, 29, 29, 43, 63, 69, 69, 63, 109, 109, 9, 27, 27, 42, 57, 57, 63, 62, 74, 74, 94, 94};
 	
+	protected static final int IMAGE_BUTTON_COUNT = 18;
 	protected static final int IMAGE_COLS = 3;
 	protected static final int IMAGE_ROWS = 6;
 	
@@ -87,13 +88,13 @@ public class GuiTattooNeedle extends GuiScreen
         	locationButtons.get(i).darkenOnDisable = false;
         	List<String> tooltip = new ArrayList<String>();
         	if(stats.getTattooId(i) != -1) {
-        		locationButtons.get(i).setInternalRect(TattooHandler.tattoos[stats.getTattooId(i)].tattooImage, stats.getTattooColour(i));
-        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.IDToName.get(i)) + " Tattoo");
-        		tooltip.add(TattooHandler.tattoos[stats.getTattooId(i)].getLocalizedName());
-        		tooltip.add(TattooHandler.tattoos[stats.getTattooId(i)].getLocalizedDescription());
+        		locationButtons.get(i).setInternalRect(TattooHandler.tattoos.get(stats.getTattooId(i)).tattooImage, stats.getTattooColour(i));
+        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)) + " Tattoo");
+        		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedName());
+        		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedDescription());
         		locationButtons.get(i).enabled = false;
         	} else {
-        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.IDToName.get(i)));
+        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)));
         	}
         	locationButtons.get(i).setTooltip(tooltip);
         	buttonList.add(locationButtons.get(i));
@@ -116,11 +117,11 @@ public class GuiTattooNeedle extends GuiScreen
         }
         updateColourButtons();
         
-        imageButtons = new ArrayList<GuiButtonSelectableDisplay>(TattooConstants.ID_COUNT);
+        imageButtons = new ArrayList<GuiButtonSelectableDisplay>(IMAGE_BUTTON_COUNT);
         for(int i=0; i<IMAGE_ROWS; i++) {
         	for(int j=0; j<IMAGE_COLS; j++) {
         		imageButtons.add(j + i*IMAGE_COLS, new GuiButtonSelectableDisplay(
-        						2+TattooConstants.LOCATION_COUNT+TattooConstants.ID_COUNT+j+i*IMAGE_COLS, j+i*IMAGE_COLS,
+        						2+TattooConstants.LOCATION_COUNT+IMAGE_BUTTON_COUNT+j+i*IMAGE_COLS, j+i*IMAGE_COLS,
         						xOffset + 112 + j*19, yOffset + 8 + i*19,
         						176, 0, 194, 0, 176, 18, 18, 18,
         						NEEDLE_GUI_LOCATION));
@@ -201,7 +202,7 @@ public class GuiTattooNeedle extends GuiScreen
 				checkValidOperation();
 			}
 		}
-		for(int i=0; i < TattooConstants.ID_COUNT; i++) {
+		for(int i=0; i < IMAGE_BUTTON_COUNT; i++) {
 			if(imageButtons.get(i) == button) {
 				if(activeImage != -1) imageButtons.get(activeImage).setSelected(false);
 				activeImage = i;
@@ -232,17 +233,17 @@ public class GuiTattooNeedle extends GuiScreen
 	
 	private void updateImageButtons(int locationId) {
 		List<Integer> validTattoos = TattooHandler.getValidTattoosForLocation(locationId);
-		for(int i=0; i<TattooConstants.ID_COUNT; i++) {
+		for(int i=0; i<IMAGE_BUTTON_COUNT; i++) {
 			if(i < validTattoos.size()) {
 				if(activeColour >= 0) {
-					imageButtons.get(i).setInternalRect(TattooHandler.tattoos[validTattoos.get(i)].tattooImage, ItemDye.dyeColors[colourButtons.get(activeColour).getSelectionId()]);
+					imageButtons.get(i).setInternalRect(TattooHandler.tattoos.get(validTattoos.get(i)).tattooImage, ItemDye.dyeColors[colourButtons.get(activeColour).getSelectionId()]);
 				} else {
-					imageButtons.get(i).setInternalTexture(TattooHandler.tattoos[validTattoos.get(i)].tattooImage);
+					imageButtons.get(i).setInternalTexture(TattooHandler.tattoos.get(validTattoos.get(i)).tattooImage);
 				}
 				
 				List<String> tooltip = new ArrayList<String>();
-				tooltip.add(TattooHandler.tattoos[validTattoos.get(i)].getLocalizedName());
-				tooltip.add(TattooHandler.tattoos[validTattoos.get(i)].getLocalizedDescription());
+				tooltip.add(TattooHandler.tattoos.get(validTattoos.get(i)).getLocalizedName());
+				tooltip.add(TattooHandler.tattoos.get(validTattoos.get(i)).getLocalizedDescription());
 				
 				imageButtons.get(i).setTooltip(tooltip);
 				imageButtons.get(i).enabled = true;

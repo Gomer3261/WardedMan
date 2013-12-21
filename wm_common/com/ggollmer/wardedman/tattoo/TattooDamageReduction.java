@@ -8,8 +8,8 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class TattooDamageReduction extends Tattoo
 {
-	public TattooDamageReduction(int id, String name) {
-		super(id, name);
+	public TattooDamageReduction(String name) {
+		super(name);
 		
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_CHEST_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_CHEST_LOCATION_ID, id);
@@ -22,9 +22,6 @@ public class TattooDamageReduction extends Tattoo
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_GLUTEAL_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_GLUTEAL_LOCATION_ID, id);
 	}
-
-	@Override
-	public void onTattooActivation(EntityPlayer player, int tattooCount) {}
 	
 	@ForgeSubscribe
 	public void onEntityHurt(LivingHurtEvent event) {

@@ -2,7 +2,6 @@ package com.ggollmer.wardedman.lib;
 
 public class TattooConstants
 {
-	public static final int ID_COUNT = 18;
 	public static final int LOCATION_COUNT = 22;
 	public static final int COLOUR_COUNT = 16;
 	
@@ -16,41 +15,20 @@ public class TattooConstants
 	/* Tattoos */
 	public static final int NO_TATOO_ID = -1;
 	
-	public static final int DAMAGE_REDUCTION_ID = 0;
 	public static final String DAMAGE_REDUCTION_NAME = "damageReduction";
-	
-	public static final int FIRE_RESISTANCE_ID = 1;
 	public static final String FIRE_RESISTANCE_NAME = "fireResistance";
-	
-	public static final int FEATHER_FALLING_ID = 2;
 	public static final String FEATHER_FALLING_NAME = "featherFalling";
-	
-	public static final int IRON_FIST_ID = 3;
 	public static final String IRON_FIST_NAME = "ironFist";
-	
-	public static final int FIRE_FIST_ID = 4;
 	public static final String FIRE_FIST_NAME = "fireFist";
-	
-	public static final int STONE_FIST_ID = 5;
 	public static final String STONE_FIST_NAME = "stoneFist";
-	
-	public static final int CHISELED_FIST_ID = 6;
 	public static final String CHISELED_FIST_NAME = "chiseledFist";
-	
-	public static final int THORNS_ID = 7;
 	public static final String THORNS_NAME = "thorns";
-	
-	public static final int MAGIC_RESIST_ID = 8;
 	public static final String MAGIC_RESIST_NAME = "magicResist";
-	
-	public static final int PROJECTILE_PROTECTION_ID = 9;
 	public static final String PROJECTILE_PROTECTION_NAME = "projectileProtection";
-	
-	public static final int JUMP_BOOST_ID = 10;
 	public static final String JUMP_BOOST_NAME = "jumpBoost";
-	
-	public static final int EXPLOSION_RESISTANCE_ID = 11;
 	public static final String EXPLOSION_RESISTANCE_NAME = "explosionResistance";
+	public static final String NIGHT_VISION_NAME = "nightVision";
+	public static final String BLINDING_FIST_NAME = "blindingFist";
 	
 	/* Tattoo Locations */
 	public static final int ARMOR_SLOT_HAND = -1;

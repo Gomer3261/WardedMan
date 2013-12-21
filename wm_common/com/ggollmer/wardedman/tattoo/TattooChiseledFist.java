@@ -2,24 +2,20 @@ package com.ggollmer.wardedman.tattoo;
 
 import com.ggollmer.wardedman.lib.TattooConstants;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
 
 public class TattooChiseledFist extends Tattoo
 {
-	public TattooChiseledFist(int id, String name) {
-		super(id, name);
+	public TattooChiseledFist(String name) {
+		super(name);
 		
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_PALM_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_PALM_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_HAND_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_HAND_LOCATION_ID, id);
 	}
-
-	@Override
-	public void onTattooActivation(EntityPlayer player, int tattooCount) {}
 	
 	@ForgeSubscribe
 	public void onEntityHurt(HarvestCheck event) {

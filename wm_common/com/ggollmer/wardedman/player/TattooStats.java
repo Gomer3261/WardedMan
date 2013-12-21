@@ -4,6 +4,7 @@ import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
+import com.ggollmer.wardedman.tattoo.TattooHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +22,7 @@ public class TattooStats
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
 			tattooValues[i] = -1;
 		}
-		tattooCounts = new int[TattooConstants.ID_COUNT];
+		tattooCounts = new int[TattooHandler.tattoos.size()];
 		tattooColours = new int[TattooConstants.LOCATION_COUNT];
 	}
 	
@@ -77,8 +78,7 @@ public class TattooStats
             playerTags.setCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME, new NBTTagCompound());
         }
 		NBTTagCompound wmTags = playerTags.getCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME);
-		wmTags.setIntArray(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME, tattooValues);
-		wmTags.setIntArray(PlayerNBTNames.TATTOO_AMOUNT_LIST_NAME, tattooCounts);
+		saveTattooLocations(wmTags);
 		wmTags.setIntArray(PlayerNBTNames.TATTOO_COLOUR_LIST_NAME, tattooColours);
 	}
 	
@@ -89,41 +89,53 @@ public class TattooStats
         {
             playerTags.setCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME, new NBTTagCompound());
         }
+		
 		NBTTagCompound wmTags = playerTags.getCompoundTag(PlayerNBTNames.WARDED_MAN_NBT_NAME);
-		tattooValues = wmTags.getIntArray(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME);
-		tattooCounts = wmTags.getIntArray(PlayerNBTNames.TATTOO_AMOUNT_LIST_NAME);
+		
+		// Load old data.
+		if(wmTags.hasKey(PlayerNBTNames.OLD_TATTOO_AMOUNT_LIST_NAME) && wmTags.hasKey(PlayerNBTNames.OLD_TATTOO_LOCATION_LIST_NAME)) {
+			int[] oldTattooCounts = wmTags.getIntArray(PlayerNBTNames.OLD_TATTOO_AMOUNT_LIST_NAME);
+			wmTags.removeTag(PlayerNBTNames.OLD_TATTOO_AMOUNT_LIST_NAME);
+			
+			for(int i=0; i<oldTattooCounts.length && i<tattooCounts.length; i++) {
+				tattooCounts[i] = oldTattooCounts[i];
+			}
+			
+			int[] oldTattooValues = wmTags.getIntArray(PlayerNBTNames.OLD_TATTOO_LOCATION_LIST_NAME);
+			wmTags.removeTag(PlayerNBTNames.OLD_TATTOO_LOCATION_LIST_NAME);
+			
+			for(int i=0; i<oldTattooValues.length && i<tattooValues.length; i++) {
+				tattooValues[i] = oldTattooValues[i];
+			}
+		}
+		else {
+			loadTattooLocations(wmTags);
+		}
+		
 		tattooColours = wmTags.getIntArray(PlayerNBTNames.TATTOO_COLOUR_LIST_NAME);
-		
-		/* Ensuring Data is Correct */
-		
-		if(tattooValues.length != TattooConstants.LOCATION_COUNT) {
-			int[] oldData = tattooValues.clone();
-			tattooValues = new int[TattooConstants.LOCATION_COUNT];
-			for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
+	}
+	
+	private void saveTattooLocations(NBTTagCompound wmTags) {
+		for(int i=0; i<TattooHandler.tattoos.size(); i++) {
+			String tattooName = "";
+			if(tattooValues[i] != -1) {
+				tattooName = TattooHandler.tattoos.get(tattooValues[i]).unlocalizedName;
+			}
+			wmTags.setString(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME + "_" + i, tattooName);
+		}
+	}
+	
+	private void loadTattooLocations(NBTTagCompound wmTags) {
+		for(int i=0; i<TattooHandler.tattoos.size(); i++) {
+			String tattooName = wmTags.getString(PlayerNBTNames.TATTOO_LOCATION_LIST_NAME + "_" + i);
+			if(tattooName != "" && TattooHandler.TattooNameToID.containsKey(tattooName)) {
+				tattooValues[i] = TattooHandler.TattooNameToID.get(tattooName);
+				tattooCounts[tattooValues[i]] ++;
+			}
+			else {
 				tattooValues[i] = -1;
 			}
-			for(int i=0; i<tattooValues.length && i<oldData.length; i++) {
-				tattooValues[i] = oldData[i];
-			}
 		}
-		
-		if(tattooCounts.length != TattooConstants.ID_COUNT) {
-			int[] oldData = tattooCounts.clone();
-			tattooCounts = new int[TattooConstants.ID_COUNT];
-			for(int i=0; i<tattooCounts.length && i<oldData.length; i++) {
-				tattooCounts[i] = oldData[i];
-			}
-		}
-		
-		if(tattooColours.length != TattooConstants.LOCATION_COUNT) {
-			int[] oldData = tattooColours.clone();
-			tattooColours = new int[TattooConstants.LOCATION_COUNT];
-			for(int i=0; i<tattooColours.length && i<oldData.length; i++) {
-				tattooColours[i] = oldData[i];
-			}
-		}
-		
-		//clearTattooData();
 	}
 	
 	public void clearTattooData() {
@@ -131,7 +143,7 @@ public class TattooStats
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
 			tattooValues[i] = -1;
 		}
-		tattooCounts = new int[TattooConstants.ID_COUNT];
+		tattooCounts = new int[TattooHandler.tattoos.size()];
 		tattooColours = new int[TattooConstants.LOCATION_COUNT];
 		
 	}
@@ -146,7 +158,7 @@ public class TattooStats
 		this.tattooValues = packet.tattooValues.clone();
 		this.tattooColours = packet.tattooColours.clone();
 		
-		tattooCounts = new int[TattooConstants.ID_COUNT];
+		tattooCounts = new int[TattooHandler.tattoos.size()];
 		for(int i=0; i<tattooValues.length; i++) {
 			if(tattooValues[i] >= 0) {
 				tattooCounts[tattooValues[i]]++;

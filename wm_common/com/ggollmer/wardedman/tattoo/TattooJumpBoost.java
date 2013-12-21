@@ -8,17 +8,14 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 
 public class TattooJumpBoost extends Tattoo
 {
-	public TattooJumpBoost(int id, String name) {
-		super(id, name);
+	public TattooJumpBoost(String name) {
+		super(name);
 		
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_FOOT_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_FOOT_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_CALF_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_CALF_LOCATION_ID, id);
 	}
-
-	@Override
-	public void onTattooActivation(EntityPlayer player, int tattooCount) {}
 	
 	@ForgeSubscribe
 	public void onEntityJump(LivingJumpEvent event) {

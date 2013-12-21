@@ -10,17 +10,14 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class TattooThorns extends Tattoo
 {
-	public TattooThorns(int id, String name) {
-		super(id, name);
+	public TattooThorns(String name) {
+		super(name);
 		
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_CHEST_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_CHEST_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.LEFT_SHOULDER_LOCATION_ID, id);
 		TattooHandler.validateTattooForLocation(TattooConstants.RIGHT_SHOULDER_LOCATION_ID, id);
 	}
-
-	@Override
-	public void onTattooActivation(EntityPlayer player, int tattooCount) {}
 	
 	@ForgeSubscribe
 	public void onEntityHurt(LivingHurtEvent event) {

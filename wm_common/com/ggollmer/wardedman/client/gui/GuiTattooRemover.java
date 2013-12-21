@@ -72,13 +72,13 @@ public class GuiTattooRemover extends GuiScreen
         	locationButtons.get(i).darkenOnDisable = true;
         	List<String> tooltip = new ArrayList<String>();
         	if(stats.getTattooId(i) != -1) {
-        		locationButtons.get(i).setInternalRect(TattooHandler.tattoos[stats.getTattooId(i)].tattooImage, stats.getTattooColour(i));
-        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.IDToName.get(i)) + " Tattoo");
-        		tooltip.add(TattooHandler.tattoos[stats.getTattooId(i)].getLocalizedName());
-        		tooltip.add(TattooHandler.tattoos[stats.getTattooId(i)].getLocalizedDescription());
+        		locationButtons.get(i).setInternalRect(TattooHandler.tattoos.get(stats.getTattooId(i)).tattooImage, stats.getTattooColour(i));
+        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)) + " Tattoo");
+        		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedName());
+        		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedDescription());
         		locationButtons.get(i).enabled = true;
         	} else {
-        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.IDToName.get(i)));
+        		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)));
         		locationButtons.get(i).enabled = false;
         	}
         	locationButtons.get(i).setTooltip(tooltip);

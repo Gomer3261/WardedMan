@@ -8,6 +8,9 @@ import com.ggollmer.wardedman.WardedMan;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.player.TattooStats;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -35,6 +38,9 @@ public class TattooHandler
 	public static Tattoo tattooNightVision;
 	public static Tattoo tattooBlindingFist;
 	
+	/**
+	 * Used to initialize tattoo objects for reference in other code.
+	 */
 	public static void init() {
 		initializeSlotMaps();
 		
@@ -69,8 +75,7 @@ public class TattooHandler
 		MinecraftForge.EVENT_BUS.register(tattooBlindingFist);
 	}
 	
-	private static void initializeSlotMaps()
-	{
+	private static void initializeSlotMaps() {
 		for(int i=0; i<TattooConstants.LOCATION_COUNT; i++) {
 			validTattoos.add(i, new ArrayList<Integer>());
 		}
@@ -141,20 +146,36 @@ public class TattooHandler
 		SlotIDToLocation.put(TattooConstants.LEFT_CALF_LOCATION_ID, TattooConstants.LEFT_CALF_LOCATION_SLOT);
 		SlotIDToName.put(TattooConstants.LEFT_CALF_LOCATION_ID, TattooConstants.LEFT_CALF_LOCATION_NAME);
 	}
-
+	
+	/**
+	 * Get a valid list of tattoos for a tattoo location.
+	 * @param location The location to check.
+	 * @return A list containing all valid tattoo ids for the location.
+	 */
 	public static List<Integer> getValidTattoosForLocation(int location) {
 		return validTattoos.get(location);
 	}
 	
+	/**
+	 * Validates a tattoo in the specified location.
+	 * @param location The location that tattoo can be placed in.
+	 * @param tattooId The Id of the tattoo being validated.
+	 */
 	public static void validateTattooForLocation(int location, int tattooId) {
 		validTattoos.get(location).add(tattooId);
 		validLocations.get(tattooId).add(location);
 	}
 	
-	public static int getPlayerTattooAmount(EntityPlayer player, int id)
-	{
+	/**
+	 * Get the number of uncovered tattoos of the specified ID on the specified player.
+	 * @param player The player to check for tattoos.
+	 * @param id The id of the tattoo being checked.
+	 * @return The number of uncovered tattoos matching the provided id.
+	 */
+	public static int getPlayerTattooAmount(EntityPlayer player, int id) {
 		int workingTattoos = 0;
 		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(player.username);
+		if(stats == null) return 0;
 		if(stats.getTattooAmount(id) > 0) {
 			for(int location : validLocations.get(id)) {
 				if(stats.getTattooId(location) != id) continue;
@@ -167,5 +188,22 @@ public class TattooHandler
 			}
 		}
 		return workingTattoos;
+	}
+	
+	/**
+	 * Reduce the player's current energy by the provided cost.
+	 * @param player The player whose energy should be reduced.
+	 * @param cost The cost of the action. (Amount to reduce energy by)
+	 * @return False if the player cannot afford the action.
+	 */
+	public static boolean reducePlayerCharge(EntityPlayer player, int cost) {
+		TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(player.username);
+		if(stats == null) return false;
+		
+		if(!player.worldObj.isRemote && FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			
+			return stats.drainCharge(cost);
+		}
+		return stats.tattooCharge >= cost; // Because SMP is annoying.
 	}
 }

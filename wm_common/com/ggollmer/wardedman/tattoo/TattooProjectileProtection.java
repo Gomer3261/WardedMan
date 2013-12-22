@@ -24,4 +24,9 @@ public class TattooProjectileProtection extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 100;
+	}
 }

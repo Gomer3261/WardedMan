@@ -27,4 +27,9 @@ public class TattooBlindingFist extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 500;
+	}
 }

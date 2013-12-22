@@ -66,6 +66,7 @@ public class GuiTattooViewer extends GuiScreen
         		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)) + " Tattoo");
         		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedName());
         		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedDescription());
+        		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedCostDescription());
         		locationButtons.get(i).enabled = true;
         	} else {
         		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)));

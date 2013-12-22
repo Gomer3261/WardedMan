@@ -32,4 +32,9 @@ public class TattooChiseledFist extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 25;
+	}
 }

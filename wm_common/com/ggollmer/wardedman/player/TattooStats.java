@@ -1,6 +1,7 @@
 package com.ggollmer.wardedman.player;
 
 import com.ggollmer.wardedman.WardedMan;
+import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
@@ -86,6 +87,7 @@ public class TattooStats
 	public boolean drainCharge(int drain) {
 		if(drain > tattooCharge) return false;
 		else {
+			LogHelper.debugLog("Drain Server side of: " + drain + " Current Charge: " + tattooCharge);
 			tattooCharge -= drain;
 			WardedMan.tattooTracker.sendTattooChargeChange(username, tattooCharge);
 		}
@@ -98,6 +100,7 @@ public class TattooStats
 	 */
 	public void updateCharge(int charge)
 	{
+		LogHelper.debugLog("Tattoo charge change Client side, current charge set to: " + charge);
 		this.tattooCharge = charge;
 	}
 	
@@ -107,6 +110,7 @@ public class TattooStats
 	public void resetCharge()
 	{
 		this.tattooCharge = TattooConstants.TATTOO_MAX_CHARGE;
+		LogHelper.debugLog("Tattoo charge reset to: " + tattooCharge);
 	}
 	
 	/**

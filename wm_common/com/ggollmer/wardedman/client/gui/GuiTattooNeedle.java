@@ -92,6 +92,7 @@ public class GuiTattooNeedle extends GuiScreen
         		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)) + " Tattoo");
         		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedName());
         		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedDescription());
+        		tooltip.add(TattooHandler.tattoos.get(stats.getTattooId(i)).getLocalizedCostDescription());
         		locationButtons.get(i).enabled = false;
         	} else {
         		tooltip.add(LocalizationHelper.getLocalizedString(TattooHandler.SlotIDToName.get(i)));
@@ -244,6 +245,7 @@ public class GuiTattooNeedle extends GuiScreen
 				List<String> tooltip = new ArrayList<String>();
 				tooltip.add(TattooHandler.tattoos.get(validTattoos.get(i)).getLocalizedName());
 				tooltip.add(TattooHandler.tattoos.get(validTattoos.get(i)).getLocalizedDescription());
+				tooltip.add(TattooHandler.tattoos.get(validTattoos.get(i)).getLocalizedCostDescription());
 				
 				imageButtons.get(i).setTooltip(tooltip);
 				imageButtons.get(i).enabled = true;

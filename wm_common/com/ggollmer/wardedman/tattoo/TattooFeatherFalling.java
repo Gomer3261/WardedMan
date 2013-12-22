@@ -26,6 +26,9 @@ public class TattooFeatherFalling extends Tattoo
 			}
 		}
 	}
-	
-	
+
+	@Override
+	public int getActionCost() {
+		return 50;
+	}
 }

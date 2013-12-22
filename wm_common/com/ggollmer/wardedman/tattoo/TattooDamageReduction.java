@@ -32,4 +32,9 @@ public class TattooDamageReduction extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 50;
+	}
 }

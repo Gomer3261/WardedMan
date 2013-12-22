@@ -13,6 +13,7 @@
 	<entry key="gui.tattooNeedle.cancel">Cancel</entry>
 	<entry key="gui.tattooRemover.submit">Remove</entry>
 	<entry key="gui.tattooRemover.cancel">Cancel</entry>
+	<entry key="tattoo.damageCost">Cost per tick: </entry>
 	<entry key="tattoo.damageReduction.name">Damage Resistance</entry>
 	<entry key="tattoo.damageReduction.desc">Reduce damage taken by 1/12th</entry>
 	<entry key="tattoo.fireResistance.name">Fire Resistance</entry>

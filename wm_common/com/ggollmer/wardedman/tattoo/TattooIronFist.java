@@ -20,8 +20,13 @@ public class TattooIronFist extends Tattoo
 	@ForgeSubscribe
 	public void onEntityHurt(AttackEntityEvent event) {
 		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
-		if(tattooCount > 0) {
+		if(tattooCount > 0 && TattooHandler.reducePlayerCharge(event.entityPlayer, getActionCost()*tattooCount)) {
 			event.target.attackEntityFrom(DamageSource.causePlayerDamage(event.entityPlayer), 1 * tattooCount);
 		}
+	}
+
+	@Override
+	public int getActionCost() {
+		return 25;
 	}
 }

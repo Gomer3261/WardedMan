@@ -24,4 +24,9 @@ public class TattooMagicResist extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 200;
+	}
 }

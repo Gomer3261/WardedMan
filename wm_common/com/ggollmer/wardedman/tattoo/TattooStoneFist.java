@@ -23,4 +23,9 @@ public class TattooStoneFist extends Tattoo
 			event.newSpeed = event.originalSpeed + (event.originalSpeed*tattooCount/3);
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 10;
+	}
 }

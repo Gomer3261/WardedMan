@@ -23,4 +23,9 @@ public class TattooFireFist extends Tattoo
 			event.target.setFire(2*tattooCount);
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 50;
+	}
 }

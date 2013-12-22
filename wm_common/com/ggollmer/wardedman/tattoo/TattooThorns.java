@@ -31,4 +31,9 @@ public class TattooThorns extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 75;
+	}
 }

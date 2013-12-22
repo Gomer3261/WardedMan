@@ -26,4 +26,9 @@ public class TattooExplosionResistance extends Tattoo
 			}
 		}
 	}
+
+	@Override
+	public int getActionCost() {
+		return 200;
+	}
 }

@@ -19,6 +19,8 @@ public class TattooConstants
 	/* Tattoos */
 	public static final int NO_TATOO_ID = -1;
 	
+	public static final String TATTOO_COST_STRING = "tattoo.tattooCost";
+	
 	public static final String DAMAGE_REDUCTION_NAME = "damageReduction";
 	public static final String FIRE_RESISTANCE_NAME = "fireResistance";
 	public static final String FEATHER_FALLING_NAME = "featherFalling";

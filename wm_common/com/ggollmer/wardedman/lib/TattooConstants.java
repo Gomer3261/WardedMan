@@ -11,6 +11,10 @@ public class TattooConstants
 	public static final boolean TATTOO_LOSS_ON_DEATH_DEFAULT = false;
 	public static boolean TATTOO_LOSS_ON_DEATH;
 	
+	public static final String TATTOO_MAX_CHARGE_NAME = "Tattoo Max Charge";
+	public static final int TATTOO_MAX_CHARGE_DEFAULT = 1000000;
+	public static int TATTOO_MAX_CHARGE;
+	
 	
 	/* Tattoos */
 	public static final int NO_TATOO_ID = -1;

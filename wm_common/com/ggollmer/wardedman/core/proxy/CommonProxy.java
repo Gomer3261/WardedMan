@@ -12,25 +12,16 @@ import net.minecraft.server.MinecraftServer;
 
 public class CommonProxy
 {
-	public void registerSoundHandler()
-	{
-    }
+	public void registerSoundHandler() {}
 
-    public void initRenderingAndTextures()
-    {
-    }
+    public void initRenderingAndTextures() {}
 
-    public void registerTileEntities()
-    {
-    }
+    public void registerTileEntities() {}
     
-    public void registerVillagerSkins()
-	{
-		/* Why would care about skins? */
-	}
+    public void registerVillagerSkins() {}
 	
 	/* Packet handling helpers */
-
+    
 	public void handleTattooUpdatePacket(String username, int location, int id, int colour) {
 	}
 	
@@ -84,4 +75,6 @@ public class CommonProxy
 			}
 		}
 	}
+
+	public void handleTattooChargePacket(String username, int charge) {}
 }

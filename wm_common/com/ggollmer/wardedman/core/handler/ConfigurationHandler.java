@@ -29,6 +29,7 @@ public class ConfigurationHandler
 			ItemIds.ENDER_DYE = configuration.getItem(ItemNames.ENDER_DYE_NAME, ItemIds.ENDER_DYE_DEFAULT).getInt(ItemIds.ENDER_DYE_DEFAULT);
 			
 			/* Tattoo Configuration */
+			TattooConstants.TATTOO_MAX_CHARGE = configuration.get(TattooConstants.CONFIGURATION_CATEGORY, TattooConstants.TATTOO_MAX_CHARGE_NAME, TattooConstants.TATTOO_MAX_CHARGE_DEFAULT).getInt(TattooConstants.TATTOO_MAX_CHARGE_DEFAULT);
 			TattooConstants.TATTOO_LOSS_ON_DEATH = configuration.get(TattooConstants.CONFIGURATION_CATEGORY, TattooConstants.TATTOO_LOSS_ON_DEATH_NAME, TattooConstants.TATTOO_LOSS_ON_DEATH_DEFAULT).getBoolean(TattooConstants.TATTOO_LOSS_ON_DEATH_DEFAULT);
 			
 			/* Village Configuration */

@@ -15,16 +15,19 @@ import cpw.mods.fml.common.network.Player;
 public class PacketTattooData extends PacketWardedMan
 {
 	public String username;
+	public int tattooCharge;
 	public int[] tattooValues;
 	public int[] tattooColours;
+	
 	
 	public PacketTattooData() {
 		super(PacketTypeHandler.TATTOODAT, false);
 	}
 	
-	public PacketTattooData(String username, int[] values, int[] colours) {
+	public PacketTattooData(String username, int charge, int[] values, int[] colours) {
 		super(PacketTypeHandler.TATTOODAT, false);
 		this.username = username;
+		this.tattooCharge = charge;
 		this.tattooValues = values;
 		this.tattooColours = colours;
 	}
@@ -32,6 +35,7 @@ public class PacketTattooData extends PacketWardedMan
 	@Override
 	public void readData(DataInputStream data) throws IOException {
 		username = data.readUTF();
+		tattooCharge = data.readInt();
 		int count;
 		
 		count = data.readInt();
@@ -50,6 +54,7 @@ public class PacketTattooData extends PacketWardedMan
 	@Override
     public void writeData(DataOutputStream data) throws IOException {
 		data.writeUTF(username);
+		data.writeInt(tattooCharge);
 		
 		data.writeInt(tattooValues.length);
 		for(int i=0; i<tattooValues.length; i++) {

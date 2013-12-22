@@ -9,4 +9,5 @@ public class PlayerNBTNames
 	
 	public static final String TATTOO_LOCATION_LIST_NAME = "TattooLocations";
 	public static final String TATTOO_COLOUR_LIST_NAME = "TattooColours";
+	public static final String TATTOO_CHARGE_NAME = "TattooCharge";
 }

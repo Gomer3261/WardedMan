@@ -1,26 +1,35 @@
 package com.ggollmer.wardedman.player;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 
 import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.lib.PlayerNBTNames;
 import com.ggollmer.wardedman.lib.TattooConstants;
 import com.ggollmer.wardedman.network.PacketTypeHandler;
+import com.ggollmer.wardedman.network.packet.PacketTattooCharge;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.network.packet.PacketTattooUpdate;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IPlayerTracker;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 
+/**
+ * Class that controls tattoo data for all players within the game, as well as syncing client/server in SMP.
+ * @author Gomer3261
+ *
+ */
 public class TattooTracker implements IPlayerTracker
 {
 	public ConcurrentHashMap<String, TattooStats> tattooStatsMap = new ConcurrentHashMap<String, TattooStats>();
-
+	
 	@Override
 	public void onPlayerLogin(EntityPlayer player)
 	{
@@ -72,6 +81,23 @@ public class TattooTracker implements IPlayerTracker
 		}
 	}
 	
+	@ForgeSubscribe
+	public void onPlayerSleep(PlayerSleepInBedEvent event) {
+		if(!event.entityPlayer.worldObj.isRemote) {
+			if(tattooStatsMap.containsKey(event.entityPlayer.username)) {
+				tattooStatsMap.get(event.entityPlayer.username).resetCharge();
+				this.sendTattooChargeChange(event.entityPlayer.username, tattooStatsMap.get(event.entityPlayer.username).tattooCharge);
+			}
+			else {
+				LogHelper.log(Level.SEVERE, "Player without tattoo stats just slept!");
+			}
+		}
+	}
+	
+	/**
+	 * Handle tattoo loading client side.
+	 * @param packet
+	 */
 	public void handleTattooDataPacket(PacketTattooData packet) {
 		if(tattooStatsMap.contains(packet.username)) {
 			tattooStatsMap.get(packet.username).loadFromPacket(packet);
@@ -81,6 +107,11 @@ public class TattooTracker implements IPlayerTracker
 		}
 	}
 	
+	/**
+	 * Gets the tattoo stats for a provided username.
+	 * @param username The username to look up stats for.
+	 * @return The stats associated with the provided username.
+	 */
 	public TattooStats getPlayerTattooStats(String username) {
 		if(tattooStatsMap.containsKey(username)) {
 			return tattooStatsMap.get(username);
@@ -90,9 +121,27 @@ public class TattooTracker implements IPlayerTracker
 		}
 	}
 	
+	/**
+	 * Sends an update packet for tattoo stats (When a tatto is changed) to client side.
+	 * @param username The username for the tattoo data.
+	 * @param location The location of the update.
+	 * @param id The new id after the update.
+	 * @param colour The colour of the tattoo after the update.
+	 */
 	public void sendTattooUpdate(String username, int location, int id, int colour) {
 		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 			PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketTattooUpdate(username, location, id, colour)));
+		}
+	}
+	
+	/**
+	 * Sends a charge update packet to client side.
+	 * @param username The username of the tattoo owner.
+	 * @param charge The new charge for the user.
+	 */
+	public void sendTattooChargeChange(String username, int charge) {
+		if(FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			PacketDispatcher.sendPacketToAllPlayers(PacketTypeHandler.populatePacket(new PacketTattooCharge(username, charge)));
 		}
 	}
 

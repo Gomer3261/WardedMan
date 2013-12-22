@@ -91,8 +91,10 @@ public class WardedMan
 		
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		
+		//TODO: May need to be initialized in post so other mods can tie in their tattoo objects.
 		tattooTracker = new TattooTracker();
         GameRegistry.registerPlayerTracker(tattooTracker);
+        MinecraftForge.EVENT_BUS.register(tattooTracker);
         
         TattooHandler.init();
         

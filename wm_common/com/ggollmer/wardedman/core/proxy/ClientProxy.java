@@ -49,4 +49,14 @@ public class ClientProxy extends CommonProxy
 			}
 		}
 	}
+	
+	@Override
+	public void handleTattooChargePacket(String username, int charge) {
+		if(Minecraft.getMinecraft().thePlayer.worldObj.isRemote) {
+			TattooStats stats = WardedMan.tattooTracker.getPlayerTattooStats(username);
+			if(stats != null) {
+				stats.updateCharge(charge);
+			}
+		}
+	}
 }

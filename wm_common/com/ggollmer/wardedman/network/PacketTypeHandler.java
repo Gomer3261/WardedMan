@@ -8,6 +8,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.network.packet.PacketDyePickup;
+import com.ggollmer.wardedman.network.packet.PacketTattooCharge;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.network.packet.PacketTattooRemove;
 import com.ggollmer.wardedman.network.packet.PacketTattooRequest;
@@ -20,7 +21,8 @@ public enum PacketTypeHandler
 	TATTOODAT(PacketTattooData.class),
 	TATTOOUPDATE(PacketTattooUpdate.class),
 	DYEPICKUP(PacketDyePickup.class),
-	TATTOOREMOVE(PacketTattooRemove.class);
+	TATTOOREMOVE(PacketTattooRemove.class), 
+	TATTOOCHARGE(PacketTattooCharge.class);
 	
 	private Class<? extends PacketWardedMan> clazz;
 	

@@ -20,9 +20,9 @@ public class TattooBlindingFist extends Tattoo
 	
 	@ForgeSubscribe
 	public void onEntityHurt(AttackEntityEvent event) {
-		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
-		if(tattooCount > 0) {
-			if(event.target instanceof EntityLiving) {
+		if(event.target instanceof EntityLiving) {
+			int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
+			if(tattooCount > 0 && TattooHandler.reducePlayerCharge(event.entityPlayer, getActionCost()*tattooCount)) {
 				((EntityLiving) event.target).addPotionEffect(new PotionEffect(15, 20*tattooCount));
 			}
 		}
@@ -30,6 +30,6 @@ public class TattooBlindingFist extends Tattoo
 
 	@Override
 	public int getActionCost() {
-		return 500;
+		return 200;
 	}
 }

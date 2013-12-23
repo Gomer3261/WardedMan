@@ -23,7 +23,7 @@ public class TattooThorns extends Tattoo
 	public void onEntityHurt(LivingHurtEvent event) {
 		if(event.entity instanceof EntityPlayer && !event.source.isFireDamage() && !event.source.isUnblockable() && !event.source.isProjectile() && !event.source.isMagicDamage()) {
 			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entity, this.id);
-			if(tattooCount > 0) {
+			if(tattooCount > 0  && TattooHandler.reducePlayerCharge((EntityPlayer)event.entity, getActionCost()*tattooCount)) {
 				Entity attacker = event.source.getSourceOfDamage();
 				if(attacker != null) {
 					attacker.attackEntityFrom(DamageSource.causeThornsDamage(event.entityLiving), event.ammount * tattooCount/2f);

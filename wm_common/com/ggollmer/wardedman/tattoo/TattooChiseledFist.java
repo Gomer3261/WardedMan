@@ -18,7 +18,7 @@ public class TattooChiseledFist extends Tattoo
 	}
 	
 	@ForgeSubscribe
-	public void onEntityHurt(HarvestCheck event) {
+	public void onPlayerHarvest(HarvestCheck event) {
 		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
 		if(tattooCount > 0) {
 			if(event.block.blockMaterial.isToolNotRequired()) {
@@ -27,7 +27,7 @@ public class TattooChiseledFist extends Tattoo
 			}
 			
 			int harvestLevel = MinecraftForge.getBlockHarvestLevel(event.block, 0, "pickaxe");
-			if(harvestLevel < tattooCount && harvestLevel != -1) {
+			if(harvestLevel < tattooCount && harvestLevel != -1  && TattooHandler.reducePlayerCharge(event.entityPlayer, getActionCost()*tattooCount)) {
 				event.success = true;
 			}
 		}

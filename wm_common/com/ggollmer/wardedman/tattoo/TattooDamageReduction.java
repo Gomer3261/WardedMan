@@ -26,8 +26,8 @@ public class TattooDamageReduction extends Tattoo
 	@ForgeSubscribe
 	public void onEntityHurt(LivingHurtEvent event) {
 		if(event.entity instanceof EntityPlayer && !event.source.isFireDamage() && !event.source.isUnblockable() && !event.source.isProjectile() && !event.source.isMagicDamage()) {
-			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entity, this.id);
-			if(tattooCount > 0) {
+			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entityLiving, this.id);
+			if(tattooCount > 0  && TattooHandler.reducePlayerCharge((EntityPlayer)event.entityLiving, getActionCost()*tattooCount)) {
 				event.ammount -= (event.ammount/12f) * tattooCount;
 			}
 		}

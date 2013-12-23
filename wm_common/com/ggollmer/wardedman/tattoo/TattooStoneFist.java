@@ -17,9 +17,9 @@ public class TattooStoneFist extends Tattoo
 	}
 	
 	@ForgeSubscribe
-	public void onEntityHurt(BreakSpeed event) {
+	public void onBlockBreak(BreakSpeed event) {
 		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
-		if(tattooCount > 0) {
+		if(tattooCount > 0  && TattooHandler.reducePlayerCharge(event.entityPlayer, getActionCost()*tattooCount)) {
 			event.newSpeed = event.originalSpeed + (event.originalSpeed*tattooCount/3);
 		}
 	}

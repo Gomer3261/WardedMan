@@ -24,8 +24,8 @@ public class TattooFireResistance extends Tattoo
 	public void onEntityHurt(LivingHurtEvent event) {
 		if(event.entity instanceof EntityPlayer) {
 			if(event.source.isFireDamage()) {
-				int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entity, this.id);
-				if(tattooCount > 0) {
+				int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entityLiving, this.id);
+				if(tattooCount > 0  && TattooHandler.reducePlayerCharge((EntityPlayer)event.entityLiving, getActionCost()*tattooCount)) {
 					event.ammount -= (event.ammount/10f) * tattooCount;
 				}
 			}

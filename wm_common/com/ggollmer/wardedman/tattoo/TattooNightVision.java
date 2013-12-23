@@ -22,7 +22,7 @@ public class TattooNightVision extends Tattoo
 		if(event.entityLiving instanceof EntityPlayer) {
 			if(( (event.entityLiving.ticksExisted + event.entityLiving.entityId) % 20) == 0) {
 				int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entityLiving, this.id);
-				if(tattooCount > 0 && !event.entity.worldObj.isDaytime()) {
+				if(tattooCount > 0 && !event.entity.worldObj.isDaytime() && TattooHandler.reducePlayerCharge((EntityPlayer)event.entityLiving, getActionCost()*tattooCount)) {
 					event.entityLiving.addPotionEffect(new PotionEffect(16, 1200));
 				}
 				else {

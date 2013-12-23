@@ -20,8 +20,8 @@ public class TattooFeatherFalling extends Tattoo
 	@ForgeSubscribe
 	public void onEntityFall(LivingFallEvent event) {
 		if(event.entity instanceof EntityPlayer) {
-			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entity, this.id);
-			if(tattooCount > 0) {
+			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entityLiving, this.id);
+			if(tattooCount > 0  && TattooHandler.reducePlayerCharge((EntityPlayer)event.entityLiving, getActionCost()*tattooCount)) {
 				event.distance -= (event.distance/5f) * tattooCount;
 			}
 		}

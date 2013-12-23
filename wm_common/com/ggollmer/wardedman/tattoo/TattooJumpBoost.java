@@ -21,7 +21,7 @@ public class TattooJumpBoost extends Tattoo
 	public void onEntityJump(LivingJumpEvent event) {
 		if(event.entityLiving instanceof EntityPlayer) {
 			int tattooCount = TattooHandler.getPlayerTattooAmount((EntityPlayer)event.entityLiving, this.id);
-			if(tattooCount > 0) {
+			if(tattooCount > 0  && TattooHandler.reducePlayerCharge((EntityPlayer)event.entityLiving, getActionCost()*tattooCount)) {
 				event.entityLiving.motionY += 0.1F * tattooCount;
 			}
 		}

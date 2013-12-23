@@ -19,7 +19,7 @@ public class TattooFireFist extends Tattoo
 	@ForgeSubscribe
 	public void onEntityHurt(AttackEntityEvent event) {
 		int tattooCount = TattooHandler.getPlayerTattooAmount(event.entityPlayer, this.id);
-		if(tattooCount > 0) {
+		if(tattooCount > 0  && TattooHandler.reducePlayerCharge(event.entityPlayer, getActionCost()*tattooCount)) {
 			event.target.setFire(2*tattooCount);
 		}
 	}

@@ -1,0 +1,74 @@
+# English (en_US) Localization File
+
+# Items
+item.tattoo_needle.name=Tattoo Needle
+item.ender_dye.name=Ender Dye
+item.tattoo_remover.name=Tattoo Remover
+item.tattoo_viewer.name=Tattoo Mirror
+
+# Creative Tabs
+itemGroup.wardedman=WardedMan
+
+# GUI
+gui.tattoo_needle.submit=Tattoo
+gui.tattoo_needle.cancel=Cancel
+gui.tattoo_remover.submit=Remove
+gui.tattoo_remover.cancel=Cancel
+
+# Tattoos
+tattoo.damage_cost=Cost per tick: 
+tattoo.damage_reduction.name=Damage Resistance
+tattoo.damage_reduction.desc=Reduce damage taken by 1/12th
+tattoo.fire_resistance.name=Fire Resistance
+tattoo.fire_resistance.desc=Reduce fire damage by 1/10th
+tattoo.feather_falling.name=Feather Falling
+tattoo.feather_falling.desc=Reduce fall damage by 1/5th
+tattoo.iron_fist.name=Iron Fist
+tattoo.iron_fist.desc=Deal an extra 0.5 damage punching
+tattoo.fire_fist.name=Flaming Fist
+tattoo.fire_fist.desc=Ignite target for 2 seconds
+tattoo.stone_fist.name=Stone Fist
+tattoo.stone_fist.desc=Increase block break speed by 1/3rd
+tattoo.chiseled_fist.name=Chisel Fist
+tattoo.chiseled_fist.desc=Break stronger blocks with your hands
+tattoo.thorns.name=Thorns
+tattoo.thorns.desc=Deal 1/2 incoming damage back
+tattoo.magic_resist.name=Magic Resistance
+tattoo.magic_resist.desc=Reduce incoming magic damage by 1/2
+tattoo.projectile_protection.name=Projectile Protection
+tattoo.projectile_protection.desc=Reduce damage from projectiles by 1/4
+tattoo.jump_boost.name=Jump Boost
+tattoo.jump_boost.desc=Jump 1/3 of a block higher
+tattoo.explosion_resistance.name=Explosion Resistance
+tattoo.explosion_resistance.desc=Reduce damage from explosions by 1/4
+tattoo.night_vision.name=Night Vision
+tattoo.night_vision.desc=Allows you to see when others may not
+tattoo.blinding_fist.name=Blinding Fist
+tattoo.blinding_fist.desc=Blind your foe for a second
+
+# Tattoo Locations
+tattoo.location.face=Forehead
+tattoo.location.chest_right=Right Pectoral
+tattoo.location.chest_left=Left Pectoral
+tattoo.location.abdominal=Abdominal
+tattoo.location.palm_right=Right Palm
+tattoo.location.palm_left=Left Palm
+tattoo.location.thigh_right=Right Thigh
+tattoo.location.thigh_left=Left Thigh
+tattoo.location.foot_right=Right Foot
+tattoo.location.foot_left=Left Foot
+tattoo.location.head=Head
+tattoo.location.shoulder_right=Right Shoulder
+tattoo.location.shoulder_left=Left Shoulder
+tattoo.location.back=Back
+tattoo.location.gluteal_right=Right Gluteal
+tattoo.location.gluteal_left=Left Gluteal
+tattoo.location.hand_right=Right Hand
+tattoo.location.hand_left=Left Hand
+tattoo.location.ham_right=Right Hamstring
+tattoo.location.ham_left=Left Hamstring
+tattoo.location.calf_right=Right Calf
+tattoo.location.calf_left=Left Calf
+
+# Villagers
+entity.Villager.ink_enthusiast=Ink Enthusiast

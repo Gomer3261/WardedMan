@@ -1,0 +1,22 @@
+{
+	"type":"minecraft:crafting_shaped",
+	"pattern": [
+		"xyx",
+		"yzy",
+		" x "
+	],
+	"key": {
+		"x": {
+			"item": "minecraft:gold_ingot"
+		}, 
+		"y": {
+			"item": "minecraft:glass_pane"
+		},
+		"z": {
+			"item": "wardedman:ender_dye"
+		}
+	},
+	"result": {
+		"item": "wardedman:tattoo_viewer"
+	}
+}

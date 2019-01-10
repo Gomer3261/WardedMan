@@ -1,0 +1,21 @@
+[
+{
+  "modid": "wardedman",
+  "name": "Warded Man",
+  "description": "Tattoo yourself with powerful symbols and fight your way through the night!",
+  "version": "${version}",
+  "mcversion": "${MCversion}",
+  "url": "https://github.com/Gomer3261/WardedMan",
+  "updateUrl": "",
+  "authorList": [
+    "Gomer3261"
+  ],
+  "credits": "By Gomer3261, based on The Warded Man, P. Brett",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

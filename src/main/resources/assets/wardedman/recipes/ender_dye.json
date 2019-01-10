@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minecraft:dye",
+			"data": 32767
+		},
+		{
+			"item": "minecraft:ender_pearl"
+		}
+	],
+	"result": {
+		"item": "wardedman:ender_dye"
+	}
+}

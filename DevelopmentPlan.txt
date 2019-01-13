@@ -1,0 +1,70 @@
+This document contains tentative development plans/version features
+It's mostly my own thoughts/priorities
+
+Version Pre1:
+ - Test Tattoo Energy.
+	- Ensure tattoo energy applies client only.
+	- Ensure tattoo energy applies in client/server configuration correctly.
+	- Test sleeping to restore energy.
+
+Version 1.0:
+ - Balance Tattoo Energy.
+	- Find good default energy cap value.
+	- Add energy cap to config file.
+ - Render Tattoos.
+	- Render tattoos on player body, only when not covered by equipment. (To better illustrate this)
+	- Relate tattoo glow to player energy. (Start reducing when approaching specific thresholds)
+
+Version 1.1:
+ - Clean Up Tattoos. 
+	- Use tattoo registry instead of hardcoding them, allowing for easy extension of tattoo content.
+ - Better Pack Support
+	- Allow tattoo slots to be created or controlled via json or config
+	- Allow tattoo -> slot relationship to be controlled via json or config
+	- Allow tattoos to be created or controlled via json or config
+	- Allow tattoo action cost & effectivness to be changed in config file
+
+Version 1.2
+ - Better Energy System
+	- Create player controlled mechanic for increasing energy pool
+		- Battery tattoo? Rotten Flesh consumption?
+	- Create a way to restore energy at cost without sleeping
+	- Design alternative forms of energy regen?
+ - Tattoo Expansion
+	- Move Speed Tattoo?
+	- Water Breathing Tattoo?
+	- Poison Reduction Tattoo?
+	- Wither Reduction Tattoo?
+
+Version 1.3
+ - Discovery
+	- Allow tattoo discovery in game
+	- Loot? Talking to unique villagers?
+ - Day/Night system
+	- Tattoos active and drain charge in dark
+	- Tattoos inactive and recharge during day
+	- Acts as alternative to sleeping system, and moves tattoo power trip solely to night time.
+
+Version 1.4
+ - Tattoo Expansion
+	- Knockback Tattoo?
+	- Bow Draw Speed Tattoo?
+	- Heal Speed Tattoo?
+	- Food Consumption Speed Tattoo?
+	- Poison Punch Tattoo?
+	- Wither Wack Tattoo?
+	- Oxygen Rate Tattoo?
+	- Flight Tattoo?
+	- Potion Effect Immunity Tattoos? (Prevent other negative debuffs, slow, blind, etc)
+	- Target Damage Tattoos (Spider, Skeleton, Zombie, etc)
+
+Version 1.5+ Ideas:
+ - Further Tattoo Expansions
+ - Ink Mixer for more control/variety?
+ - Better UI, feature actual character skin in UI like inventory?
+ - Armor warding? Allow tattoos to work through mod armors? Allow temp tattoos ON armor?
+ - Tattoo Damage System? (damage when hit, cost needle/dye to repair)
+ - Tattoo improvement system? (workmanship quality, target limitations, tattoo modifying tattoos (amplifier, inverter))
+ - Special ability tattoos? (Activated tattoos, Nova, Ranged Attacks, Directional Shields, Fast Break/Place Blocks, Light Creation)
+	- Love Light Creation Tattoo, spend tattoo to place non-solid floating torch at your head (breakable ofc, like grass))
+ - Ineveracraft Integration? (Transfer energy to/from greatwards?)

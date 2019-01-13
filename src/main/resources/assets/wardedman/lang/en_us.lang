@@ -15,6 +15,9 @@ gui.tattoo_needle.cancel=Cancel
 gui.tattoo_remover.submit=Remove
 gui.tattoo_remover.cancel=Cancel
 
+# Tattoo Constants
+tattoo.tattooCost=Charge To Activate: 
+
 # Tattoos
 tattoo.damage_cost=Cost per tick: 
 tattoo.damage_reduction.name=Damage Resistance

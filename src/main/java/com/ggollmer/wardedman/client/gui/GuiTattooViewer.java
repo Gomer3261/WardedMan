@@ -17,7 +17,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 public class GuiTattooViewer extends GuiScreen
 {
@@ -39,7 +38,7 @@ public class GuiTattooViewer extends GuiScreen
     
     List<GuiButtonModalTextureDisplay> locationButtons;
 	
-	public GuiTattooViewer(EntityPlayer thePlayer, World world, int x, int y, int z)
+	public GuiTattooViewer(EntityPlayer thePlayer)
     {
         super();
         this.player = thePlayer;

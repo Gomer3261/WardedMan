@@ -35,13 +35,18 @@ public class CommonProxy
 	public void postInit(FMLPostInitializationEvent event) {
 	}
 	
-	/* Packet handling helpers */
+	/* Client Packet Handling */
     
-	public void handleTattooUpdatePacket(UUID userId, int location, int id, int colour) {
-	}
+	public void handleTattooUpdatePacket(UUID userId, int location, int id, int colour) {}
 	
 	public void handleTattooDataPacket(PacketTattooData packet) {}
+	
+	public void handleDyePickupPacket(UUID userId, int damage) {}
+	
+	public void handleTattooChargePacket(UUID userId, int charge) {}
 
+	/* Server Packet Handling */
+	
 	public void handleTattooRequestPacket(UUID userId, int location, int id,
 			int colour)
 	{
@@ -73,8 +78,6 @@ public class CommonProxy
 		}
 	}
 
-	public void handleDyePickupPacket(UUID userId, int damage) {}
-
 	public void handleTattooRemovePacket(UUID userId, int location)
 	{
 		TattooStats stats = TattooTracker.getPlayerTattooStats(userId);
@@ -90,6 +93,4 @@ public class CommonProxy
 			}
 		}
 	}
-
-	public void handleTattooChargePacket(UUID userId, int charge) {}
 }

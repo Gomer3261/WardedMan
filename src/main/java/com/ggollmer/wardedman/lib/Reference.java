@@ -6,10 +6,12 @@ public class Reference
 	
 	public static final String MOD_ID = "wardedman";
 	public static final String MOD_NAME = "WaredMan";
-	public static final String MOD_VERSION = "@VERSION@ (build @BUILD_NUMBER@)";
+	public static final String MOD_VERSION = "@VERSION@";
 	public static final String CHANNEL_NAME = MOD_ID;
     public static final String DEPENDENCIES = ""; //"required-after:forge@[14.23.2.2634,)";
     public static final int SECOND_IN_TICKS = 20;
     public static final String SERVER_PROXY_CLASS = "com.ggollmer.wardedman.core.proxy.CommonProxy";
-    public static final String CLIENT_PROXY_CLASS = "com.ggollmer.wardedman.core.proxy.ClientProxy";
+    public static final String CLIENT_PROXY_CLASS = "com.ggollmer.wardedman.client.proxy.ClientProxy";
+    public static final String SERVER_GUI_PROXY_CLASS = "com.ggollmer.wardedman.core.proxy.CommonGuiHandlerProxy";
+    public static final String CLIENT_GUI_PROXY_CLASS = "com.ggollmer.wardedman.client.proxy.ClientGuiHandlerProxy";
 }

@@ -5,7 +5,7 @@ import java.io.File;
 import net.minecraft.creativetab.CreativeTabs;
 
 import com.ggollmer.wardedman.core.handler.ConfigurationHandler;
-import com.ggollmer.wardedman.core.handler.GuiHandler;
+import com.ggollmer.wardedman.core.proxy.CommonGuiHandlerProxy;
 //import com.ggollmer.wardedman.core.helper.LogHelper;
 import com.ggollmer.wardedman.core.proxy.CommonProxy;
 import com.ggollmer.wardedman.creativetab.CreativeTabWardedMan;
@@ -49,6 +49,9 @@ public class WardedMan
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 	
+	@SidedProxy(clientSide = Reference.CLIENT_GUI_PROXY_CLASS, serverSide = Reference.SERVER_GUI_PROXY_CLASS)
+	public static CommonGuiHandlerProxy guiHandler;
+	
 	public static final CreativeTabs tabsWardedMan = new CreativeTabWardedMan(Reference.MOD_ID);
 	
 	@EventHandler
@@ -67,7 +70,7 @@ public class WardedMan
 		ConfigurationHandler.init(new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.CHANNEL_NAME + File.separator + Reference.MOD_ID + ".cfg"));
 		
 		proxy.preInit(event);
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
         
         TattooHandler.init();
         //VillageHandler.init();

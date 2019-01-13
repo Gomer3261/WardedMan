@@ -30,12 +30,14 @@ public class PacketHandler
 	}
 	
 	public static void registerMessages() {
-		// Register messages which are sent from the client to the server
-		INSTANCE.registerMessage(PacketDyePickup.Handler.class, PacketDyePickup.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketTattooCharge.Handler.class, PacketTattooCharge.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketTattooData.Handler.class, PacketTattooData.class, nextID(), Side.SERVER);
+		// Packets sent from server to client
+		INSTANCE.registerMessage(PacketDyePickup.Handler.class, PacketDyePickup.class, nextID(), Side.CLIENT);
+		INSTANCE.registerMessage(PacketTattooCharge.Handler.class, PacketTattooCharge.class, nextID(), Side.CLIENT);
+		INSTANCE.registerMessage(PacketTattooData.Handler.class, PacketTattooData.class, nextID(), Side.CLIENT);
+		INSTANCE.registerMessage(PacketTattooUpdate.Handler.class, PacketTattooUpdate.class, nextID(), Side.CLIENT);
+		
+		// Packets sent from client to server
 		INSTANCE.registerMessage(PacketTattooRemove.Handler.class, PacketTattooRemove.class, nextID(), Side.SERVER);
 		INSTANCE.registerMessage(PacketTattooRequest.Handler.class, PacketTattooRequest.class, nextID(), Side.SERVER);
-		INSTANCE.registerMessage(PacketTattooUpdate.Handler.class, PacketTattooUpdate.class, nextID(), Side.SERVER);
 	}
 }

@@ -1,9 +1,10 @@
-package com.ggollmer.wardedman.core.proxy;
+package com.ggollmer.wardedman.client.proxy;
 
 import net.minecraft.client.Minecraft;
 
 import java.util.UUID;
 
+import com.ggollmer.wardedman.core.proxy.CommonProxy;
 import com.ggollmer.wardedman.client.gui.GuiTattooNeedle;
 import com.ggollmer.wardedman.network.packet.PacketTattooData;
 import com.ggollmer.wardedman.player.TattooStats;

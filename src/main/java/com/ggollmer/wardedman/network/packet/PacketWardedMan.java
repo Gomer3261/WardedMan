@@ -1,7 +1,5 @@
 package com.ggollmer.wardedman.network.packet;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -24,12 +22,6 @@ public abstract class PacketWardedMan implements IMessage
 	
 	protected void handle(MessageContext ctx) {
 		
-	}
-	
-	protected EntityPlayer getPlayer(MessageContext ctx) {
-		EntityPlayer thePlayer = (ctx.side.isClient() ? Minecraft.getMinecraft().player : ctx.getServerHandler().player);
-		return thePlayer;
-		//thePlayer.getEntityWorld().getEntityByID(message.entityId);
 	}
 	
 	public static class Handler<T extends PacketWardedMan> implements IMessageHandler<T, IMessage> {

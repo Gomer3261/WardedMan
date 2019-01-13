@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 version = version_major + '.' + version_minor + '.' + version_patch
-group = "com.ggollmer.wardedman" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.gomer3261.wardedman" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "wardedman_" + mcversion
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8 //'1.8' // Need this here so eclipse task generates correctly.
@@ -29,12 +29,6 @@ task buildInfo {
     } else {
         ext.revision = "GITBORK"
     }
-
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "${System.getenv().BUILD_NUMBER}"
-    } else {
-        ext.buildNum = "DEV.${project.buildInfo.revision}"
-    }
 }
 
 minecraft {
@@ -46,7 +40,6 @@ minecraft {
     }
     
     replace '@VERSION@', project.version
-    replace '@BUILD@', project.buildInfo.buildNum
     mappings = mcp_mappings
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }

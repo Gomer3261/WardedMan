@@ -8,7 +8,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import com.ggollmer.wardedman.WardedMan;
-import com.ggollmer.wardedman.lib.GuiConstants;
+//import com.ggollmer.wardedman.lib.GuiConstants;
 
 public class ItemTattooRemover extends ItemWardedMan
 {
@@ -20,7 +20,8 @@ public class ItemTattooRemover extends ItemWardedMan
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-		playerIn.openGui(WardedMan.instance, GuiConstants.TATTOO_REMOVER_GUI_ID, playerIn.world, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
+		WardedMan.guiHandler.showTattoRemoverGui(playerIn);
+		//playerIn.openGui(WardedMan.instance, GuiConstants.TATTOO_REMOVER_GUI_ID, playerIn.world, (int) playerIn.posX, (int) playerIn.posY, (int) playerIn.posZ);
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 }

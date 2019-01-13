@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import com.ggollmer.wardedman.core.proxy.CommonProxy;
 import com.ggollmer.wardedman.lib.GuiConstants;
 import com.ggollmer.wardedman.lib.Reference;
 import com.ggollmer.wardedman.lib.TattooConstants;
@@ -21,9 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 public class GuiTattooNeedle extends GuiScreen
 {
@@ -61,11 +60,8 @@ public class GuiTattooNeedle extends GuiScreen
     
     List<GuiButtonSelectableTextureDisplay> imageButtons;
     int activeImage = -1;
-    
-    @ObjectHolder("minecraft:dye")
-	public static final ItemDye dye = null;
 	
-	public GuiTattooNeedle(EntityPlayer thePlayer, World world, int x, int y, int z)
+	public GuiTattooNeedle(EntityPlayer thePlayer)
     {
         super();
         this.player = thePlayer;
@@ -108,10 +104,10 @@ public class GuiTattooNeedle extends GuiScreen
         						2+TattooConstants.LOCATION_COUNT+j+i*COLOUR_COLS, j+i*COLOUR_COLS,
         						xOffset + 8 + j*15, yOffset + 129 + i*15, 
         						190, 36, 204, 36, 176, 36, 14, 14, 
-        						NEEDLE_GUI_LOCATION).setInternalItem(new ItemStack(dye, 1, j + i*COLOUR_COLS)));
+        						NEEDLE_GUI_LOCATION).setInternalItem(new ItemStack(CommonProxy.dye, 1, j + i*COLOUR_COLS)));
         						//.setInternalTexture(new ResourceLocation("textures/items/" + dye.getUnlocalizedName(new ItemStack(dye, 1, j + i*COLOUR_COLS)) + ".png")));
         		List<String> tooltip = new ArrayList<String>();
-        		tooltip.add(dye.getItemStackDisplayName(new ItemStack(dye, 1, j + i*COLOUR_COLS)));
+        		tooltip.add(CommonProxy.dye.getItemStackDisplayName(new ItemStack(CommonProxy.dye, 1, j + i*COLOUR_COLS)));
         		colourButtons.get(j + i*COLOUR_COLS).setTooltip(tooltip);
         		buttonList.add(colourButtons.get(j + i*COLOUR_COLS));
         	}
@@ -266,7 +262,7 @@ public class GuiTattooNeedle extends GuiScreen
 		}
 		for(ItemStack stack : player.inventory.mainInventory) {
 			if(stack == null) continue;
-			if(stack.getItem() == dye) {
+			if(stack.getItem() == CommonProxy.dye) {
 				if(stack.getItemDamage() < 16) {
 					colourButtons.get(stack.getItemDamage()).enabled = true;
 				}

@@ -19,7 +19,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 public class GuiTattooRemover extends GuiScreen
@@ -46,7 +45,7 @@ public class GuiTattooRemover extends GuiScreen
     List<GuiButtonSelectableTextureDisplay> locationButtons;
     int activeLocation = -1;
 	
-	public GuiTattooRemover(EntityPlayer thePlayer, World world, int x, int y, int z)
+	public GuiTattooRemover(EntityPlayer thePlayer)
     {
         super();
         this.player = thePlayer;
